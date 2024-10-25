@@ -1,5 +1,5 @@
 use human_resources;
-
+alter table employees add column is_active boolean default true;
 CREATE TABLE items (
     id INT PRIMARY KEY AUTO_INCREMENT,	
     item_name VARCHAR(20),  -- item_name boyutunu artırdım

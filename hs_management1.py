@@ -14,7 +14,7 @@ def connection_check():
         
         return str(e)
 
-connection=connection_check()
+# connection=connection_check()
 
 
 

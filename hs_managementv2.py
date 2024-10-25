@@ -149,6 +149,41 @@ def hiring(name,surname,birth,gender,job_title,derpatment,salary,hire_date,email
         cursor.close()
         connection.close()
 
+employe_list=[] #qlistwidget  #FEVZİ 
+
+def load_employee():  #load  id,name,surname of employees
+    connection=connect()
+    try:
+
+        with connection.cursor() as cursor:
+            query="select employee_id,first_name,last_name from employees"
+            cursor.execute(query)
+            employees=cursor.fetchall()
+            for emp in employees:
+                employe_list.append(emp)
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
+
+
+
+def not_working(): #changes employees is_active value 1 to 0
+    selected_employee=employe_list[1] #selected_employee by user from list .!>>>FEVZİ BURAYI  DEĞİŞTİR 
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+           query="update employees set is_active=0 where employee_id=%s"
+           employee_id=selected_employee[0]  #selecting id
+           cursor.execute(query,employee_id)
+           connection.commit()
+    except pymysql.MySQLError as e:
+        return str(e)       
+    finally:
+        connection.close()
+
+load_employee()
+not_working()
 #verification_code = send_verification_code()
 
 #entered_code = int(input("Enter verification code: "))

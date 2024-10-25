@@ -1,18 +1,39 @@
 import pymysql
 import smtplib
 import random
-def connection_check():
+
+def connect():
+    """
+    This function will be used to handle connections in other functions.
+    """
     try:
         connection=pymysql.connect(host='localhost',
                                user='root',
                                password="sql5858",
                                database='human_resources')
-        print("connected successfully")
         return connection
     except pymysql.MySQLError as e:
-        
-        
         return str(e)
+
+def connection_check():
+    """
+    This function will be used to check whether database
+    connection can be handled or not, regularly with a timer.
+    """
+    try:
+        connection=pymysql.connect(host='localhost',
+                               user='root',
+                               password="sql5858",
+                               database='human_resources')
+        
+    except pymysql.MySQLError as e:
+        # If an error occurs trying to create a connection, there is no need in trying to close it.
+        return (False, str(e))
+
+    else:
+        # If it does not encounter any error, close the connection.
+        connection.close()
+        return (True, None)
 
 #connection=connection_check()
 
@@ -24,29 +45,24 @@ def connection_check():
 # password=123
 
 def login(email,password):
-    connection=connection_check()
-    print(connection)
+    connection=connect()
     try:
         with connection.cursor() as cursor:
             query="select * from employees where email=%s and password=%s"
             cursor.execute(query,(email,password))
             record=cursor.fetchone()
-            print(record)
             if record:
                 role=record[5]
+                # If str returns, then it is either 'Human Resources' or 'Employee'
                 if role=='Human Resources':
-                    manager_side=True
-                    return True
+                    return "Human Resources"
                 else:
-                    worker_side=True
-                #print(record)
-                #print('Login successfull')
-                #print("loading interface...")
-                return True
+                    return "Employee"
             else:
-                #print('Login failed')
-                return False
+                # If None returns, then it means that login failed
+                return None
     except pymysql.MySQLError as e:
+        # If the returning str is neither 'Human Resources' nor 'Employee', that means that an error has occurred!
         return str(e)
     
     finally:
@@ -92,7 +108,7 @@ def send_verification_code():
 
 def reset_change_password(new_password, entered_code, verification_code, user_email):
     if entered_code == verification_code:
-        connection = connection_check()  # Assuming this function checks connection
+        connection = connect()  # Assuming this function checks connection
         
         try:
             with connection.cursor() as cursor:
@@ -116,7 +132,7 @@ def reset_change_password(new_password, entered_code, verification_code, user_em
     
 
 def hiring(name,surname,birth,gender,job_title,derpatment,salary,hire_date,email,phone_no,password):
-    connection=connection_check()
+    connection=connect()
     cursor=connection.cursor()
     
     try:

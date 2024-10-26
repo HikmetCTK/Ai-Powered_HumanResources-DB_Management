@@ -49,7 +49,7 @@ def main():
                 print("Program sonlandırılıyor...")
                 break
                 
-            new_salary = float(input("Yeni maaş: "))
+            new_salary = int(input("Yeni maaş: "))
             
             if new_salary < 17500:
                 print("Maaş asgari ücretten düşük olamaz!")

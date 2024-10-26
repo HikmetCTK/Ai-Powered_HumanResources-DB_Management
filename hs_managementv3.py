@@ -225,7 +225,6 @@ def  add_item(item_name,quantity):
         connection.close()
     
 #add_item('Chip',250) #^^# onaylandı
-item_list=[]
 def delete_item(item_id): #id yazınca  itemi silen fonksiyon 
     connection=connect()
     #selected_item=item_list[1]
@@ -262,7 +261,7 @@ def load_item_list_with_name(): # çalışan ismiyle birlikte zimmetli eşyayı 
 
 
 # (1, 'Alvin', 'Fernier', 3, 'gloves', datetime.datetime(1948, 5, 22, 2, 24, 37)) örnek çıktı 
-def assign_item_to_employee():
+def assign_item_to_employee(assigned_list):
     connection=connect()
     selected_emp=assigned_list[1] # buraya qt widget list gelmeli  >>>FEVZİ<<<
     try:
@@ -294,7 +293,7 @@ def remove_item_from_employee(assigned_list):
     finally:
         connection.close()
 
-def get_assigned_items(): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
+def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
     connection=connect()
     selected_emp=assigned_list[1]
     employee_id=selected_emp[0]
@@ -314,7 +313,7 @@ def get_assigned_items(): #^^# seçilen kullanıcının id sini alıp sadece zim
     finally:
         connection.close()
 
-def get_assigned_items(): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
+def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
     connection=connect()
     selected_emp=assigned_list[1]
     employee_id=selected_emp[0]
@@ -337,7 +336,7 @@ def get_assigned_items(): #^^# seçilen kullanıcının id sini alıp sadece zim
 
 def search(table_name,search_term): #tabloya göre arama yapan fonksiyon 
     table=[]
-    connection = connection_check()
+    connection = connect()
     try:
             with connection.cursor() as cursor:
                 query = f"SELECT first_name, last_name FROM {table_name} WHERE first_name LIKE %s OR last_name LIKE %s"

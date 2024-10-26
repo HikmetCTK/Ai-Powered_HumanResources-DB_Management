@@ -241,7 +241,7 @@ def delete_item(item_id): #id yazınca  itemi silen fonksiyon
         connection.close()
 #delete_item(14)
 
-assigned_list=[] #^^# Qlistwidget
+# assigned_list=[] #^^# Qlistwidget
 
 def load_item_list_with_name(): # çalışan ismiyle birlikte zimmetli eşyayı gösteren kod .!tablo view ile oluşturuldu sanal bir görüntü için !! bknz:create view
     connection=connect()
@@ -278,7 +278,7 @@ def assign_item_to_employee():
         connection.close()
 
 
-def remove_item_from_employee():
+def remove_item_from_employee(assigned_list):
     connection=connect()
     selected_emp=assigned_list[1] # buraya qt widget list gelmeli  >>>FEVZİ<<<
     print(selected_emp)

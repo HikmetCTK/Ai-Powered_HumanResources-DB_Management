@@ -59,8 +59,7 @@ def main():
             
         except ValueError:
             print("Lütfen geçerli sayısal değerler girin!")
-        except Exception as e:
-            print(f"Beklenmeyen bir hata oluştu: {e}")
+
 
 if __name__ == "__main__":
     main()

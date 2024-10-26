@@ -278,9 +278,9 @@ def assign_item_to_employee():
         connection.close()
 
 
-def remove_item_from_employee():
+def remove_item_from_employee(employee:str):
     connection=connect()
-    selected_emp=assigned_list[1] # buraya qt widget list gelmeli  >>>FEVZİ<<<
+    selected_emp=employee # buraya qt widget list gelmeli  >>>FEVZİ<<<
     print(selected_emp)
     try:
         with connection.cursor() as cursor:

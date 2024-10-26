@@ -13,18 +13,15 @@ def update_employee_salary(employee_id, new_salary):
 
         if connection.is_connected():
             cursor = connection.cursor()
-            
-            # Önce çalışanın mevcut bilgilerini kontrol edelim
+        
             select_query = "SELECT salary FROM employees WHERE employee_id = %s"
             cursor.execute(select_query, (employee_id,))
             result = cursor.fetchone()
             
             if result:
-                # Güncelleme sorgusu
                 update_query = "UPDATE employees SET salary = %s WHERE employee_id  = %s"
                 cursor.execute(update_query, (new_salary, employee_id))
                 
-                # Değişiklikleri kaydet
                 connection.commit()
                 
                 print(f"Maaş güncelleme başarılı!")

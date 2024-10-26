@@ -355,11 +355,6 @@ def search(table_name,search_term): #tabloya göre arama yapan fonksiyon
 """
 view ile oluşturulan tablonun sql komutu 
 
-CREATE VIEW employee_items_with_names AS
-SELECT e.employee_id,e.first_name,e.last_name, ei.item_id, i.item_name, ei.assignment_date
-FROM employees e
-left join employee_items ei  on e.employee_id=ei.employee_id
-left join items i ON ei.item_id = i.id;
 SELECT employee_id,first_name,last_name,item_id,item_name,assignment_date FROM employee_items_with_names;
 
 """

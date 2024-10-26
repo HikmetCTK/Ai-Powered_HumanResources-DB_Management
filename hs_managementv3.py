@@ -313,25 +313,7 @@ def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini al�
     finally:
         connection.close()
 
-def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
-    connection=connect()
-    selected_emp=assigned_list[1]
-    employee_id=selected_emp[0]
-    query="""select i.item_name,ei.assignment_date from employee_items ei 
-    join items i on ei.item_id=i.id 
-    where ei.employee_id=%s
-    """
-    try:
-        with connection.cursor() as cursor:
 
-            cursor.execute(query,(employee_id,))
-            resultss=cursor.fetchall()
-            return resultss
-    
-    except pymysql.MySQLError as e:
-        return str(e)
-    finally:
-        connection.close()
 
 
 def search(table_name,search_term): #tabloya göre arama yapan fonksiyon 

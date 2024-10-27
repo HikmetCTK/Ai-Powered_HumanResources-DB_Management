@@ -3,11 +3,13 @@ https://www.youtube.com/watch?v=fX4-YiXxTn0
 
 Manager Side:
 
-Hiring
+Hiring ✔
 
-Dismissal
+Dismissal✔
 
-Salary Adjustment
+Item Assignment Registration System ✔
+
+Salary Adjustment ✔
 
 Expense Reimbursements
 
@@ -17,8 +19,6 @@ Bonus Transactions
 
 Leave Definitions
 
-Item Assignment Registration System
-
 Event Planning Transactions (education, conference, entertainment)
 
 Scheduled Automatic Mail System
@@ -27,7 +27,9 @@ View Employee Information and General Statistics
 
 Get Direct Messages from Employees via System
 
+
 Employee Side:
+
 
 Viewing Their Information and Statistics
 

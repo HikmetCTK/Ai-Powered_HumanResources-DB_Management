@@ -1,14 +1,14 @@
-import mysql.connector
+import mysql.connector #İKİ SALARY MANAGMENT'TA ÇALIŞIYOR
 from mysql.connector import Error
 
 def update_employee_salary(employee_id, new_salary):
     try:
-        # Veritabanı bağlantısı
+        
         connection = mysql.connector.connect(
-            host='localhost',          # Sunucu adresi
-            user='root',      # Veritabanı kullanıcı adı
-            password='1215173,',  # Veritabanı şifresi
-            database='dump'   # Veritabanı adı
+            host='localhost',          
+            user='root',      
+            password='password', 
+            database='database'   
         )
 
         if connection.is_connected():

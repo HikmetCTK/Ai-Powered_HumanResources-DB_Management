@@ -352,14 +352,8 @@ def update_employee_salary():
             try:
                 with connection.cursor() as cursor:
                     sql = "UPDATE employees SET salary = %s WHERE employee_id = %s"
-                    
-
                     cursor.execute(sql, (new_salary, emp_id))
-                    
-
                     connection.commit()
-
-
             finally:
                 connection.close()
         else: 
@@ -367,6 +361,7 @@ def update_employee_salary():
             
     except pymysql.Error as e:
         sys.exit(1)
+
 
 
 def handle_value_error():#BEYLER İLERİDE OLASI DEĞERLERİ İSTEDİĞİMİZ GİBİ HANDLE ETMEMİZ GEREKEBİLİR DİYE BÖYLE BİR FONK YAZDIM KALDIRILABİLİR SİZE KALMIŞ

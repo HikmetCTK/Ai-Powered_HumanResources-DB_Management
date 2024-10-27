@@ -52,13 +52,12 @@ class LoginApp(QtWidgets.QMainWindow, Ui_MainWindow):
             msg = hs_managementv3.send_verification_code(self.lineEdit_email_page_reset.text())
             if isinstance(msg, int):
                 self.verification_code = msg
-            elif isinstance(msg, str):
-                self.showDialog("Critical", msg, "Error")
-            else:
                 self.lineEdit_passcode.clear()
                 self.lineEdit_new_password.clear()
                 self.lineEdit_confirm_password.clear()
                 self.stackedWidget.setCurrentWidget(self.page_reset_password_step2)
+            elif isinstance(msg, str):
+                self.showDialog("Critical", msg, "Error")
     
     def loadLoginPage(self):
         self.lineEdit_email_page_login.clear()

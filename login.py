@@ -155,6 +155,7 @@ class LoginApp(QtWidgets.QMainWindow, Ui_MainWindow):
         msg = hs_managementv3.send_verification_code(self.lineEdit_email_page_reset.text())
         if isinstance(msg, int):
             self.verification_code = msg
+            self.showDialog("Information", "Your new one-time-password has been sent to your email address!", "Resend OTP")
         elif isinstance(msg, str):
             self.showDialog("Critical", msg, "Error")
     

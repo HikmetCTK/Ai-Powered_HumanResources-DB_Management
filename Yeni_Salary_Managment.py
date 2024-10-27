@@ -1,4 +1,4 @@
-import pymysql
+import pymysql #İKİ SALARY MANAGMENT'TA ÇALIŞIYOR HANGİSİNİ İSTİYORSANIZ ONU KULLANIN
 import sys
 
 def update_employee_salary(employee_id, new_salary):
@@ -7,8 +7,8 @@ def update_employee_salary(employee_id, new_salary):
         connection = pymysql.connect(
             host='localhost',          
             user='root',      
-            password='1215173,',  
-            database='dump',  
+            password='password',  
+            database='database',  
         )
         
         try:

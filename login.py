@@ -132,7 +132,7 @@ class LoginApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.showDialog("Warning", "Provide your password!", "Error")
         else:
             res = hs_managementv3.login(email=self.lineEdit_email_page_login.text(),
-                                        password=self.lineEdit_password_page_login)
+                                        password=self.lineEdit_password_page_login.text())
             if res == None:
                 self.showDialog("Warning", "Mail address or password is wrong!", "Login Failed")
             elif res == "Human Resources" or res == "Employee":

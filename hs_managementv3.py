@@ -339,3 +339,36 @@ view ile oluşturulan tablonun sql komutu
 SELECT employee_id,first_name,last_name,item_id,item_name,assignment_date FROM employee_items_with_names;
 
 """
+
+
+
+def update_employee_salary():
+    try:
+        emp_id = int(input("Please enter worker ID: "))
+        new_salary = int(input("Please enter new salary value: "))
+        
+           
+        if new_salary > int(0):  
+            try:
+                with connection.cursor() as cursor:
+                    sql = "UPDATE employees SET salary = %s WHERE employee_id = %s"
+                    
+
+                    cursor.execute(sql, (new_salary, emp_id))
+                    
+
+                    connection.commit()
+
+
+            finally:
+                connection.close()
+        else: 
+            handle_value_error()#BURAYI İSTERSEK DİREKT SİLERİZ
+            
+    except pymysql.Error as e:
+        sys.exit(1)
+
+
+def handle_value_error():#BEYLER İLERİDE OLASI DEĞERLERİ İSTEDİĞİMİZ GİBİ HANDLE ETMEMİZ GEREKEBİLİR DİYE BÖYLE BİR FONK YAZDIM KALDIRILABİLİR SİZE KALMIŞ
+    print('Geçersiz değer girildi')
+

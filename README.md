@@ -11,6 +11,8 @@ Item Assignment Registration System ✔
 
 Salary Adjustment ✔
 
+Search ✔
+
 Expense Reimbursements
 
 Advance Transactions

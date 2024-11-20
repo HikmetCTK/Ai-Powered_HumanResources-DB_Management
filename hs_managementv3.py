@@ -362,6 +362,19 @@ def update_employee_salary():
     except pymysql.Error as e:
         sys.exit(1)
 
+def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütununda arama yapılmasını sağlayan fonksiyon.
+    connection=connect()
+    cursor = connection.cursor()
+    query=f"select * from {table_name} where {column_name} like %s;"
+    try:
+        cursor.execute(query,(f"%{keyword}%"))
+        results=cursor.fetchall()
+        return results
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        connection.close()
 
 
 def handle_value_error():#BEYLER İLERİDE OLASI DEĞERLERİ İSTEDİĞİMİZ GİBİ HANDLE ETMEMİZ GEREKEBİLİR DİYE BÖYLE BİR FONK YAZDIM KALDIRILABİLİR SİZE KALMIŞ

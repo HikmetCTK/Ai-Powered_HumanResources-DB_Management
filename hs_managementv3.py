@@ -156,7 +156,7 @@ def load_employee():  #load  id,name,surname of employees
     try:
 
         with connection.cursor() as cursor:
-            query="select employee_id,first_name,last_name from employees"
+            query="select * from employees"
             cursor.execute(query)
             employees=cursor.fetchall()
             for emp in employees:
@@ -168,7 +168,7 @@ def load_employee():  #load  id,name,surname of employees
 
 
 
-def not_working(): #changes employees is_active value 1 to 0
+def not_working(assigned_list): #changes employees is_active value 1 to 0
     selected_employee=employe_list[1] #selected_employee by user from list .!>>>FEVZİ BURAYI  DEĞİŞTİR 
     connection=connect()
     try:

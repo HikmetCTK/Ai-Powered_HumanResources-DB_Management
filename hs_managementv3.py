@@ -342,10 +342,12 @@ SELECT employee_id,first_name,last_name,item_id,item_name,assignment_date FROM e
 
 
 
-def update_employee_salary():
+def update_employee_salary(emp_id,new_salary):
+    connection=connect()
+    cursor = connection.cursor()
     try:
-        emp_id = int(input("Please enter worker ID: "))
-        new_salary = int(input("Please enter new salary value: "))
+        emp_id = emp_id
+        new_salary = new_salary
         
            
         if new_salary > int(0):  
@@ -355,9 +357,10 @@ def update_employee_salary():
                     cursor.execute(sql, (new_salary, emp_id))
                     connection.commit()
             finally:
+                cursor.close()
                 connection.close()
         else: 
-            handle_value_error()#BURAYI İSTERSEK DİREKT SİLERİZ
+            print('Geçersiz değer girildi')
             
     except pymysql.Error as e:
         sys.exit(1)
@@ -376,7 +379,4 @@ def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütun
         cursor.close()
         connection.close()
 
-
-def handle_value_error():#BEYLER İLERİDE OLASI DEĞERLERİ İSTEDİĞİMİZ GİBİ HANDLE ETMEMİZ GEREKEBİLİR DİYE BÖYLE BİR FONK YAZDIM KALDIRILABİLİR SİZE KALMIŞ
-    print('Geçersiz değer girildi')
 

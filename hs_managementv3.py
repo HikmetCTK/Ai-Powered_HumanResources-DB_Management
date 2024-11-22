@@ -344,7 +344,6 @@ SELECT employee_id,first_name,last_name,item_id,item_name,assignment_date FROM e
 
 def update_employee_salary(emp_id,new_salary):
     connection=connect()
-    cursor = connection.cursor()
     try:
         emp_id = emp_id
         new_salary = new_salary
@@ -357,7 +356,6 @@ def update_employee_salary(emp_id,new_salary):
                     cursor.execute(sql, (new_salary, emp_id))
                     connection.commit()
             finally:
-                cursor.close()
                 connection.close()
         else: 
             print('Geçersiz değer girildi')

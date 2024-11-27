@@ -82,7 +82,7 @@ else:
 user_email='' # E mail address where the code will be sent. 
               #This is just to check if the code appears in Gmail. You can use any gmail you want.
 
-def send_verification_code():
+def send_verification_code(user_email):
     verification_code = random.randint(100000, 999999)
     
     sender_email ='system  mail'  #this e-mail should provide app password on google

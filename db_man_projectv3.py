@@ -566,8 +566,8 @@ def send_pend_email(records):
                         role=record[5]
                         to_emp_id=record[6]
                         pend_id=record[7]
-                        sender_email ='catakhikmet9@gmail.com'
-                        sender_password = "faff esps wmod ppep"            
+                        sender_email ='gmail'
+                        sender_password = "google app password"            
                         msg = MIMEMultipart()
                         msg['From'] =sender_email
                         to_email= get_email(to_emp_id)

@@ -609,3 +609,10 @@ emails_not_sent=check_pend_email()
 send_pend_email(emails_not_sent)
 """
 
+
+import unicodedata
+
+def arrangeText(self, text:str) -> str:
+    text = unicodedata.normalize('NFKD', text).casefold()
+    arranged =  re.sub(r'\W+', '', text).casefold()
+    return arranged

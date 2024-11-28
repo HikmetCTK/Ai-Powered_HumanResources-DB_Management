@@ -574,8 +574,7 @@ def send_pend_email(records):
                         to_emp_id=record[6]
                         pend_id=record[7]
                         sender_email ='catakhikmet9@gmail.com'
-                        sender_password = "faff esps wmod ppep"             
-                # This is the send date you want to compare
+                        sender_password = "faff esps wmod ppep"            
                         msg = MIMEMultipart()
                         msg['From'] =sender_email
                         to_email= get_email(to_emp_id)

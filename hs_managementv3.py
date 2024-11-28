@@ -240,10 +240,11 @@ def delete_item(item_id): #id yazınca  itemi silen fonksiyon
         connection.close()
 #delete_item(14)
 
-# assigned_list=[] #^^# Qlistwidget
+# assigned_list=[] #^^# QLİSTWİDGET
 
-def load_item_list_with_name(): # çalışan ismiyle birlikte zimmetli eşyayı gösteren kod .!tablo view ile oluşturuldu sanal bir görüntü için !! bknz:create view
+def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimmetli eşyayı gösteren kod .!tablo view ile oluşturuldu sanal bir görüntü için !! bknz:create view
     connection=connect()
+    
     try:
         with connection.cursor() as cursor:
             query="select employee_id,first_name,last_name,item_id,item_name,assignment_date from employee_items_with_names"

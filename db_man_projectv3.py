@@ -317,12 +317,12 @@ def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini al�
 
 
 
-def search_for_employee(table_name,search_term): #tabloya göre arama yapan fonksiyon 
+def search_for_employee(search_term): #tabloya göre arama yapan fonksiyon 
     table=[]
     connection = connect()
     try:
             with connection.cursor() as cursor:
-                query = f"SELECT * FROM {table_name} WHERE first_name LIKE %s OR last_name LIKE %s"
+                query = f"SELECT * FROM employees WHERE first_name LIKE %s OR last_name LIKE %s"
                 cursor.execute(query, (f"%{search_term}%", f"%{search_term}%"))
                 results = cursor.fetchall()
                 for item in results:

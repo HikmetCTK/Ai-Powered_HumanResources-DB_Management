@@ -13,6 +13,12 @@ Salary Adjustment ✔
 
 Search ✔
 
+Scheduled Automatic Mail System ✔
+
+View Employee Information and General Statistics ✔
+
+Get Direct Messages from Employees via System ✔
+
 Expense Reimbursements
 
 Advance Transactions
@@ -23,11 +29,6 @@ Leave Definitions
 
 Event Planning Transactions (education, conference, entertainment)
 
-Scheduled Automatic Mail System
-
-View Employee Information and General Statistics
-
-Get Direct Messages from Employees via System
 
 
 Employee Side:

@@ -377,5 +377,243 @@ def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütun
     finally:
         cursor.close()
         connection.close()
+        
+def send_message_anyone(from_id,employee_ids,message): #for both side ##^^##
+    try:
+        connection=connect()
+        with connection.cursor() as cursor:
 
+            
+            query = """ 
+            INSERT INTO messages (from_emp_id, to_emp_id, message_text) 
+            VALUES (%s, %s, %s);
+            """
+
+            # Prepare recipient tuples
+            recipients = [(from_id, emp_id, message) for emp_id in employee_ids]
+            
+            cursor.executemany(query, recipients)
+            #connection.commit()              
+
+            return "Messages sent successfully!" #message alert
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+        connection.close()
+    
+#send_message_anyone(3,[8],"this is single message attempting")
+def see_message(emp_id): # for both side  ##^^##
+    
+    """ emp id is taken from login form to see messages which are sent to him. """
+    try:
+        connection=connect()
+        with connection.cursor() as cursor:
+            
+            query="""select  m.id,e.first_name,e.last_name,m.message_text,m.message_date from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s; 
+"""
+            cursor.execute(query,(emp_id))
+            messages=cursor.fetchall()
+            
+            """
+            ---- you can use this if you want to access each message information ----
+            messages = records[0] 
+            for (id, name, surname, text, date) in messages:
+             """
+            return messages
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+        
+        
+        connection.close()
+        
+#records=see_message(7) # id si 7 olan kişiye  gelen mesajlar. 
+
+"""  output format
+(((6,
+   'Bradan',
+   'Beisley',
+   'this is single message attempting',
+   datetime.datetime(2024, 11, 27, 0, 7, 24)),
+  (7,
+   'Bradan',
+   'Beisley',
+   'this is single message attempting',
+   datetime.datetime(2024, 11, 27, 0, 18, 44))),
+ 1)
+ """
+# Mark a message as sent
+def mark_message_as_read(message_id): ##^^##
+    try:
+        
+        connection = connect()  
+        with connection.cursor() as cursor:
+
+            query = "UPDATE Messages SET is_read = TRUE WHERE id = %s"
+            cursor.execute(query, (message_id,))
+            connection.commit()
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+
+
+
+def add_event(event_name,event_text,event_date): ##^^##
+    try:
+        
+        connection = connect()  
+        with connection.cursor() as cursor:
+            query="""insert into events_(event_name,event_text,event_date) values(%s,%s,%s)  """
+            cursor.execute(query,(event_name,event_text,event_date))
+            connection.commit()
+            return " event planned succesfully "
+    except Exception as e:
+        return str(e)
+    
+    finally:
+        cursor.close()
+        connection.close()
+
+#add_event("football","come to foootball this saturday","2024-12-02 20:30:34")
+def see_events(): ##^^##
+    try:
+        connection=connect()
+        with connection.cursor() as cursor:
+            
+            query="""select  * from events_; 
+"""
+            cursor.execute(query)
+            events=cursor.fetchall()
+            
+            """
+            ---- you can use this if you want to access each message information ----
+            events = records[0] 
+            for (id, eventsname, text, date) in events:
+             """
+            return events
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+        
+        
+        connection.close()
+
+        
+import pymysql
+from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+def add_pending_email(email_title,email_description,from_emp_id,to_emp_id,send_date): 
+    """add pending email ---"""
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="""insert into pending_email(email_title,email_description,from_emp_id,to_emp_id,send_date) values (%s,%s,%s,%s,%s)"""
+            cursor.execute(query,(email_title,email_description,from_emp_id,to_emp_id,send_date))
+            connection.commit()
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+
+def check_pend_email():
+    """" returns not_sent emails from database in tuple form """
+    connection=connect()
+    with connection.cursor() as cursor:
+        try:
+            query="""select e.first_name,e.last_name,pe.send_date,pe.email_title,pe.email_description,e.job_title,pe.to_emp_id,pe.id from pending_email pe join employees e on pe.from_emp_id=e.employee_id where is_sent=0"""
+            cursor.execute(query)
+            records=cursor.fetchall()
+            return records
+        
+        finally:
+            cursor.close()
+            connection.close()
+
+def get_email(emp_id):
+    """ get email from employee id """
+    connection=connect()
+    with connection.cursor() as cursor:
+        try:
+            query=""" select email from employees where employee_id=%s """
+            cursor.execute(query,emp_id)
+            email=cursor.fetchone()
+            return email
+        except Exception as e:
+            return str(e)
+        finally:
+            cursor.close()
+            connection.close()
+    
+def send_pend_email(records): 
+    """ records is should be  taken from check_pend_email func. this func checks this tuple includes date to send or not if yes, it will send email based on condition"""
+    current_time=datetime.now()
+
+    try:
+        if records:
+            for record in records:
+                send_date = record[2]
+                
+                if send_date<current_time:
+                        name = record[0]
+                        surname = record[1]
+                        email_title=record[3]
+                        email_description=record[4]
+                        role=record[5]
+                        to_emp_id=record[6]
+                        pend_id=record[7]
+                        sender_email ='catakhikmet9@gmail.com'
+                        sender_password = "faff esps wmod ppep"             
+                # This is the send date you want to compare
+                        msg = MIMEMultipart()
+                        msg['From'] =sender_email
+                        to_email= get_email(to_emp_id)
+                        msg['Subject'] = email_title
+                        # Mesaj içeriğini UTF-8 olarak ekliyoruz
+                        body_with_footer = f"{email_description}\n\n{name} {surname}-{role}"
+                        msg.attach(MIMEText(body_with_footer, 'plain', 'utf-8'))
+
+                                
+                        try:
+                            with smtplib.SMTP("smtp.gmail.com",587) as smtp:
+                                smtp.starttls()
+                                smtp.login(sender_email,sender_password)
+                                #msg= f"Subject: {title}\n\n{body_with_footer}"
+
+                                smtp.sendmail(sender_email,to_email,msg.as_string())
+                                try:
+            
+                                    connection = connect()  
+                                    with connection.cursor() as cursor:
+                                        query = "UPDATE pending_email SET is_sent =1 WHERE id = %s"
+                                        cursor.execute(query,pend_id)
+                                        connection.commit()
+                                except Exception as e:
+                                    return str(e)
+                        except Exception as e:
+                            return str(e)
+        else:
+            return "gönderilecek mesaj yok"
+    except Exception as e:
+        return e
+    
+
+
+
+
+"""
+emails_not_sent=check_pend_email()
+send_pend_email(emails_not_sent)
+"""
 

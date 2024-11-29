@@ -354,8 +354,12 @@ def update_employee_salary(emp_id,new_salary):
         else: 
             print('Geçersiz değer girildi')
             
-    except pymysql.Error as e:
-        sys.exit(1)
+    except Exception as e: #deleted sys.exit(1)
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+        
 
 def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütununda arama yapılmasını sağlayan fonksiyon.
     connection=connect()

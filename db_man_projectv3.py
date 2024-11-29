@@ -44,30 +44,30 @@ def connection_check():
 # email=123@gmail.com 
 # password=123
 
-def login(email,password):
+def login(email,password): #id eklendi yeni login fonk
     connection=connect()
     try:
         with connection.cursor() as cursor:
             query="select * from employees where email=%s and password=%s"
             cursor.execute(query,(email,password))
             record=cursor.fetchone()
+            id=record[0]
             if record:
                 role=record[5]
                 # If str returns, then it is either 'Human Resources' or 'Employee'
                 if role=='Human Resources':
-                    return "Human Resources"
+                    return "Human Resources",id
                 else:
-                    return "Employee"
+                    return "Employee",id
             else:
                 # If None returns, then it means that login failed
                 return None
-    except pymysql.MySQLError as e:
+    except Exception as e:
         # If the returning str is neither 'Human Resources' nor 'Employee', that means that an error has occurred!
         return str(e)
     
     finally:
         connection.close()
-
 """
 if connection:
     user_email=input('enter your mail:').strip()

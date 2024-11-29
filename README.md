@@ -19,6 +19,10 @@ View Employee Information and General Statistics ✔
 
 Get Direct Messages from Employees via System ✔
 
+Event Planning Transactions (education, conference, entertainment) ✔
+
+Sending Direct Message to Human Resources via System✔
+
 Expense Reimbursements
 
 Advance Transactions
@@ -27,7 +31,7 @@ Bonus Transactions
 
 Leave Definitions
 
-Event Planning Transactions (education, conference, entertainment)
+
 
 
 
@@ -46,6 +50,6 @@ Expense Reimbursement Request System
 
 Viewing Items Assigned to Them
 
-Sending Direct Message to Human Resources via System
+
 
 

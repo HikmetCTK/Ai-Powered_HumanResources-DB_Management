@@ -529,7 +529,7 @@ def check_pend_email():
     connection=connect()
     with connection.cursor() as cursor:
         try:
-            query="""select e.first_name,e.last_name,pe.send_date,pe.email_title,pe.email_description,e.job_title,pe.to_emp_id,pe.id from pending_email pe join employees e on pe.from_emp_id=e.employee_id where is_sent=0"""
+            query="""select * from pending_email pe join employees e on pe.from_emp_id=e.employee_id where is_sent=0"""
             cursor.execute(query)
             records=cursor.fetchall()
             return records
@@ -560,16 +560,16 @@ def send_pend_email(records):
     try:
         if records:
             for record in records:
-                send_date = record[2]
+                send_date = record[5]
                 
                 if send_date<current_time:
-                        name = record[0]
-                        surname = record[1]
-                        email_title=record[3]
-                        email_description=record[4]
-                        role=record[5]
-                        to_emp_id=record[6]
-                        pend_id=record[7]
+                        name = record[8]
+                        surname = record[9]
+                        email_title=record[1]
+                        email_description=record[2]
+                        role=record[12]
+                        to_emp_id=record[4]
+                        pend_id=record[0]
                         sender_email ='gmail'
                         sender_password = "google app password"            
                         msg = MIMEMultipart()

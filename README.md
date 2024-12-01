@@ -16,7 +16,8 @@ Scheduled Automatic Mail System ✔
 
 View Employee Information and General Statistics ✔
 
-Get Direct Messages from Employees via System ✔
+Get Direct Messages from Employees via System ✔ ![512](https://github.com/user-attachments/assets/30926811-1dfb-45c5-8563-d4de16b51613)
+
 
 Event Planning Transactions (education, conference, entertainment) ✔
 

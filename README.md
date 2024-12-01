@@ -1,7 +1,7 @@
 
- ## ![320acf59256323 5a1be355ee273](https://github.com/user-attachments/assets/02696e8e-7f14-4063-a3fc-6ab1923a71a5)
-Manager Side:
 
+Manager Side:
+![320acf59256323 5a1be355ee273](https://github.com/user-attachments/assets/02696e8e-7f14-4063-a3fc-6ab1923a71a5)
 Hiring ✔
 
 Dismissal✔

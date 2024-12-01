@@ -1,7 +1,8 @@
 
+![200](https://github.com/user-attachments/assets/bf8d6a6e-e26a-409d-b140-438fe54a14c2)
 
 Manager Side:
-![320acf59256323 5a1be355ee273](https://github.com/user-attachments/assets/02696e8e-7f14-4063-a3fc-6ab1923a71a5)
+
 Hiring ✔
 
 Dismissal✔

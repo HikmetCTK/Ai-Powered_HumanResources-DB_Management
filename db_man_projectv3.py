@@ -3,7 +3,7 @@ import smtplib
 import random
 import calendar
 from datetime import datetime, date
-
+from decimal import Decimal
 
 
 def connect():

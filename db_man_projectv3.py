@@ -1166,7 +1166,7 @@ def get_employee_working_hours_history(employee_id):#ID'si verilen çalışanın
 
 
 
-'''Günlük verileri Aylığa çeviren kod bu beni çok uğraştırdı'''
+'''Günlük verileri Aylığa çeviren kod bu beni çok uğraştırdı o yüzden atladığım nokta olabilir.'''
 
 
 def calculate_monthly_work_statistics(employee_id, year, month):#Bu kod günlük verileri aylığa çeviriyor ve save_monthly_analysis tarafından çağrılıyor

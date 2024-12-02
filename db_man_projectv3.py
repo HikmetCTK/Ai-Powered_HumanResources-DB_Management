@@ -618,6 +618,702 @@ send_pend_email(emails_not_sent)
 """
 
 
+
+'''ÖZEL TALEPLER'''
+
+
+
+def create_special_request(employee_id, request_type, request_amount=None, description=None):#Çalışan id'si ile talep oluşturur
+    
+
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            INSERT INTO special_requests 
+            (employee_id, request_type, request_amount, request_date, description) 
+            VALUES (%s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (
+                employee_id, 
+                request_type, 
+                request_amount, 
+                date.today(), 
+                description
+            ))
+            connection.commit()
+            return cursor.lastrowid
+    except Exception as e:
+        connection.rollback()
+        print(f"Özel talep oluşturulurken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+    
+
+
+def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum type dikkat
+
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM special_requests 
+            WHERE status_of_special_request = 'Beklemede'
+            """
+            cursor.execute(sql)
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Bekleyen özel talepler getirilirken hata: {e}")
+        return str(e)
+
+    finally:
+        connection.close
+
+def process_special_request(request_id, status, approved_by, description=None):#Yönetici talebi onaylar veya ret eder
+    
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            answer_date = date.today()
+            sql = """
+            UPDATE special_requests 
+            SET status_of_special_request = %s, 
+                approved_by = %s, 
+                answer_date = %s,
+                description = COALESCE(%s, description)
+            WHERE request_id = %s
+            """
+            cursor.execute(sql, (status, approved_by, answer_date, description, request_id))
+            connection.commit()
+            return cursor.rowcount > 0
+    except Exception as e:
+        connection.rollback()
+        print(f"Özel talep işlenirken hata: {e}")
+        return False
+    
+    finally:
+        connection.close()
+
+
+def get_employee_special_requests_history(employee_id):#ID'si verilen çalışanın talep geçmişini getirir.
+    
+    connection = connect()
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM special_requests 
+            WHERE employee_id = %s 
+            ORDER BY request_date DESC
+            """
+            cursor.execute(sql, (employee_id,))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Özel talep geçmişi getirilirken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+
+'''İzin talepleri için'''
+
+def create_leave_request(employee_id, leave_type, start_date, end_date, description):#Çalışan id'si ile izin oluşturur
+
+
+    connection = connect()
+    
+    try:
+        # Toplam izin günü hesaplaması
+        total_days = (datetime.strptime(str(end_date), '%Y-%m-%d').date() - 
+                        datetime.strptime(str(start_date), '%Y-%m-%d').date()).days + 1
+        
+        created_at = datetime.now()
+        
+        with connection.cursor() as cursor:
+            sql = """
+            INSERT INTO employee_leaves 
+            (employee_id, request_date, leave_type, Start_date, end_date, total_dates, description, created_at) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(sql, (
+                employee_id,
+                date.today(), 
+                leave_type, 
+                start_date, 
+                end_date, 
+                total_days, 
+                description,
+                created_at
+            ))
+            connection.commit()
+            return cursor.lastrowid
+    except Exception as e:
+        connection.rollback()
+        print(f"İzin talebi oluşturulurken hata: {e}")
+        return str(e)
+
+    finally:
+        connection.close()
+
+
+
+def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
+    
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM employee_leaves 
+            WHERE status_of_leave_asking = 'Beklemede'
+            """
+            cursor.execute(sql)
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Bekleyen talepler getirilirken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close
+
+    
+
+
+def process_leave_request(leave_request_id, status_of_leave_request, approved_by, description=None):#Yönetici izin talebini onaylar veya ret eder database'de status_of_leave_asking Enum type dikkat 
+    
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            answer_date = date.today()
+            sql = """
+            UPDATE employee_leaves 
+            SET status_of_leave_asking = %s, 
+                approved_by = %s, 
+                answer_date = %s,
+                description = COALESCE(%s, description)
+            WHERE leave_request_id = %s
+            """
+            cursor.execute(sql, (status_of_leave_request, approved_by, answer_date, description, leave_request_id))
+            connection.commit()
+            return cursor.rowcount > 0
+    except Exception as e:
+        connection.rollback()
+        print(f"İzin talebi işlenirken hata: {e}")
+        return False
+    
+    finally:
+        connection.close()
+
+
+
+
+
+def get_employee_leave_history(employee_id):#ID'si verilen çalışanın izin geçmişini getirir.
+    
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM employee_leaves 
+            WHERE employee_id = %s 
+            ORDER BY Start_date DESC
+            """
+            cursor.execute(sql, (employee_id,))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"İzin geçmişi getirilirken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+
+
+def calculate_employee_paid_leaves(employee_id):#ID'si verilen çalışanın tüm ücretli izinleri hesaplanır(isterseniz not in kısmını in yaparak ücretsiz izinleride bulabilirsiniz)leave_type enum database için dikkat 
+
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT sum(total_dates) AS sum_total 
+            FROM employee_leaves 
+            WHERE employee_id = %s AND leave_type NOT IN ('Ücretsiz İzin') AND status_of_leave_asking IN ('Onaylandı')
+            """
+            cursor.execute(sql, (employee_id,))
+            result = cursor.fetchone() # bu kod Decimal('20') bu şekilde bir değer döndürür önce type sonra rakam
+            if result is not None:
+                employee_paid_leaves = int(result['sum_total'])
+                return employee_paid_leaves
+            else:
+                return None
+            
+    except Exception as e:
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+
+
+'''Aylık tablo için'''
+
+
+
+
+
+def create_monthly_work(employee_id, work_year, work_month, 
+                        total_work_hours, total_overtime_hours, total_absence_hours,
+                        Average_Hours, Number_of_Days_Off,
+                        total_work_days, total_worked_days, total_half_days, 
+                        attendance_percentage,paid_leave_days, notes):#Çalışan id'si ile aylık çalışma oluşturur.
+    
+
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            INSERT INTO monthly_work_hours 
+            (employee_id, work_year, work_month, 
+            total_work_hours, total_overtime_hours, total_absence_hours,
+            total_work_days, total_worked_days, total_half_days, Number_of_Days_Off, 
+            Average_Hours, attendance_percentage,paid_leave_days, notes) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+            total_work_hours = %s, 
+            total_overtime_hours = %s, 
+            total_absence_hours = %s,
+            total_work_days = %s, 
+            total_worked_days = %s, 
+            total_half_days = %s, 
+            Number_of_Days_Off = %s, 
+            Average_Hours = %s, 
+            attendance_percentage = %s,
+            paid_leave_days = %s, 
+            notes = %s
+            """
+            cursor.execute(sql, (
+                employee_id,
+                work_year, 
+                work_month, 
+                total_work_hours,
+                Average_Hours,
+                Number_of_Days_Off,   
+                total_overtime_hours, 
+                total_absence_hours,
+                total_work_days, 
+                total_worked_days, 
+                total_half_days, 
+                attendance_percentage, 
+                paid_leave_days, 
+                notes,
+                total_work_hours,
+                Average_Hours,
+                Number_of_Days_Off,   
+                total_overtime_hours, 
+                total_absence_hours,
+                total_work_days, 
+                total_worked_days, 
+                total_half_days, 
+                attendance_percentage, 
+                paid_leave_days, 
+                notes,
+            ))
+            connection.commit()
+            return cursor.lastrowid
+    except Exception as e:
+        connection.rollback()
+        print(f"Özel talep oluşturulurken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+def get_monthly_work(work_month):#İstenen günkü tüm çalışan verilerini getirir
+
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM monthly_work_hours 
+            WHERE work_month = %s
+            """
+            cursor.execute(sql,(work_month))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Bekleyen özel talepler getirilirken hata: {e}")
+        return str(e)
+
+    finally:
+        connection.close
+
+
+def get_employee_monthly_history(employee_id):#ID'si verilen çalışanın aylık çalışma geçmişini getirir.
+    
+    connection = connect()
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM monthly_work_hours 
+            WHERE employee_id = %s 
+            ORDER BY work_month DESC
+            """
+            cursor.execute(sql, (employee_id,))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Özel talep geçmişi getirilirken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+
+
+def calculate_salary(employee_id,work_month,hour_salary,overtime_salary):#Basit salary hesabı
+
+    if isinstance(hour_salary, int) and isinstance(overtime_salary, int):
+
+        connection = connect()
+
+        try:
+            with connection.cursor() as cursor:
+                sql = """
+                SELECT total_work_hours FROM monthly_work_hours 
+                WHERE employee_id = %s AND  work_month = %s
+                """
+                cursor.execute(sql, (employee_id, work_month))
+                result1 = cursor.fetchone()
+                total_hour = float(result1['total_work_hours'])
+
+
+                sql2 = """
+                SELECT total_overtime_hours FROM monthly_work_hours 
+                WHERE employee_id = %s AND  work_month = %s
+                """
+                cursor.execute(sql2, (employee_id, work_month))
+                result = cursor.fetchone()
+                total_overtime = float(result['total_overtime_hours'])
+
+                total_hour = total_hour - total_overtime
+                
+                
+                total_normal_time_salary = total_hour * hour_salary
+                total_overtime_salary = total_overtime * overtime_salary
+
+                total_salary = total_overtime_salary + total_normal_time_salary
+
+                return total_salary
+
+
+        except Exception as e:
+            print(f"Özel talep geçmişi getirilirken hata: {e}")
+            return str(e)
+        
+        finally:
+            connection.close()
+    
+    else:
+        return str('Lütfen Geçerli değerli giriniz')
+
+
+
+'''Günlük Tablo için'''
+
+def add_daily_working_hours(employee_id, work_date, attendance, clock_in_time, 
+                            clock_out_time, overtime_hours, break_duration, 
+                            absence_hours, work_status, Project_id, notes, day_id = None):#Çalışan id'si ile talep oluşturur
+
+    date_format = "%Y-%m-%d %H:%M:%S" #Hazır kod aldım isterseniz değiştirirsiniz yapmanız gereken tek şey, total_work_hours parametresine dikkat etmek decimal(5,2) alıyor.
+    
+    date1 = datetime.strptime(clock_in_time, date_format)
+    date2 = datetime.strptime(clock_out_time, date_format)
+
+
+    difference = abs(date2 - date1)
+
+    total_work_hours = float(difference.total_seconds() / 3600)
+
+    connection = connect()
+    updated_at = datetime.now()
+
+    try:
+        with connection.cursor() as cursor:
+            if day_id == None:
+                sql = """
+                INSERT INTO daily_working_hours
+                (employee_id, work_date, attendance, clock_in_time, clock_out_time, total_work_hours, overtime_hours, break_duration, absence_hours, work_status, Project_id, notes) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """
+                cursor.execute(sql, (
+                    employee_id,
+                    work_date, 
+                    attendance, 
+                    clock_in_time, 
+                    clock_out_time, 
+                    total_work_hours, 
+                    overtime_hours,
+                    break_duration, 
+                    absence_hours, 
+                    work_status, 
+                    Project_id, 
+                    notes)
+                )
+                connection.commit()
+                return cursor.lastrowid
+            
+
+
+            else:#Duplicate key yapmadım çünkü çakışmada direkt updatelesin istemedim
+                sql = """
+                UPDATE daily_working_hours
+                SET employee_id = %s,
+                    work_date = %s,
+                    attendance = %s,
+                    clock_in_time = %s,
+                    clock_out_time = %s,
+                    total_work_hours = %s, 
+                    overtime_hours = %s, 
+                    break_duration = %s,
+                    absence_hours = %s,
+                    work_status = %s, 
+                    Project_id = %s, 
+                    notes = COALESCE(%s, notes),
+                    updated_at = %s 
+                WHERE day_id = %s
+                """
+                cursor.execute(sql, (
+                    employee_id,
+                    work_date, 
+                    attendance, 
+                    clock_in_time, 
+                    clock_out_time, 
+                    total_work_hours, 
+                    overtime_hours,
+                    break_duration, 
+                    absence_hours, 
+                    work_status, 
+                    Project_id, 
+                    notes,
+                    updated_at,
+                    day_id)
+                )
+                connection.commit()
+                return cursor.lastrowid
+
+
+    except Exception as e:
+        connection.rollback()
+        print(f"Özel talep oluşturulurken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+def get_today_working_hours(work_date):#İstenen günkü tüm çalışan verilerini getirir
+
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM daily_working_hours 
+            WHERE work_date = %s
+            """
+            cursor.execute(sql,(work_date))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Bekleyen özel talepler getirilirken hata: {e}")
+        return str(e)
+
+    finally:
+        connection.close
+
+
+def get_employee_working_hours_history(employee_id):#ID'si verilen çalışanın çalışma geçmişini getirir.
+    
+    connection = connect()
+    try:
+        with connection.cursor() as cursor:
+            sql = """
+            SELECT * FROM  daily_working_hours
+            WHERE employee_id = %s 
+            ORDER BY work_date DESC
+            """
+            cursor.execute(sql, (employee_id,))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"Özel talep geçmişi getirilirken hata: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+
+
+
+'''Günlük verileri Aylığa çeviren kod bu beni çok uğraştırdı'''
+
+
+def calculate_monthly_work_statistics(employee_id, year, month):#Bu kod günlük verileri aylığa çeviriyor ve save_monthly_analysis tarafından çağrılıyor
+
+    connection = connect()
+
+    try:
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            # Ayın toplam iş günü sayısını hesapla
+            _, last_day = calendar.monthrange(year, month)
+            total_workdays = last_day
+
+            # Aylık çalışma verilerini çek
+            cursor.execute("""
+                SELECT 
+                    work_date,
+                    total_work_hours,
+                    overtime_hours,
+                    absence_hours,
+                    work_status
+                FROM daily_working_hours
+                WHERE employee_id = %s 
+                AND YEAR(work_date) = %s 
+                AND MONTH(work_date) = %s
+                ORDER BY work_date
+            """, (employee_id, year, month))
+            
+            daily_records = cursor.fetchall()
+
+            # İstatistikleri hesapla
+            monthly_stats = {
+                'total_work_hours': 0,
+                'total_overtime_hours': 0,
+                'total_absence_hours': 0,
+                'worked_days': 0,
+                'present_days': 0,
+                'half_days': 0,
+                'absent_days': 0,
+                'average_daily_work_hours': 0,
+                'attendance_percentage': 0
+            }
+
+            for record in daily_records:
+                # Toplam çalışma saatleri
+                monthly_stats['total_work_hours'] += float(record['total_work_hours']) or 0
+                monthly_stats['total_overtime_hours'] += float(record['overtime_hours']) or 0
+                monthly_stats['total_absence_hours'] += float(record['absence_hours']) or 0
+
+                # Çalışma günü sayısı ve türü
+                if record['work_status'] == 'Tam gün':
+                    monthly_stats['worked_days'] += 1
+                    monthly_stats['present_days'] += 1
+                elif record['work_status'] == 'Yarım gün':
+                    monthly_stats['worked_days'] += 0.5
+                    monthly_stats['half_days'] += 1
+                else:  # 'Yok' durumu
+                    monthly_stats['absent_days'] += 1
+
+            # Ortalama günlük çalışma saati
+            if monthly_stats['worked_days'] > 0:
+                monthly_stats['average_daily_work_hours'] = monthly_stats['total_work_hours'] / monthly_stats['worked_days']
+
+            else:
+                monthly_stats['average_daily_work_hours'] = 0
+
+            # Katılım yüzdesi
+            monthly_stats['attendance_percentage'] = (monthly_stats['worked_days'] / total_workdays) * 100
+
+            return monthly_stats
+
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+        return str(e)
+    
+    finally:
+        connection.close()
+
+def save_monthly_analysis(employee_id, year, month):#Aylık verileri günlüğe çevirip database'e kayıt ediyor
+
+    connection = connect()
+
+    try:
+        monthly_stats = calculate_monthly_work_statistics(employee_id, year, month)
+        
+        if monthly_stats is None or isinstance(monthly_stats, str):
+            return False
+        
+        else:
+            with connection.cursor() as cursor:
+                # Aylık analiz sonuçlarını kaydet
+                cursor.execute("""
+                    INSERT INTO monthly_work_hours 
+                    (employee_id, work_year, work_month, 
+                        total_work_hours, total_overtime_hours, total_absence_hours,
+                        Number_of_Days_Off, Average_Hours,
+                        total_work_days, total_worked_days, total_half_days, 
+                        attendance_percentage)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    ON DUPLICATE KEY UPDATE
+                        total_work_hours = %s, 
+                        total_overtime_hours = %s, 
+                        total_absence_hours = %s,
+                        Number_of_Days_Off = %s, 
+                        Average_Hours = %s, 
+                        total_work_days = %s, 
+                        total_worked_days = %s, 
+                        total_half_days = %s,  
+                        attendance_percentage = %s
+                """, (
+                    employee_id, year, month,
+                    float(monthly_stats['total_work_hours']), 
+                    float(monthly_stats['total_overtime_hours']), 
+                    float(monthly_stats['total_absence_hours']),
+                    int(monthly_stats['absent_days']), 
+                    float(monthly_stats['average_daily_work_hours']),
+                    calendar.monthrange(year, month)[1],  # Toplam iş günü
+                    float(monthly_stats['worked_days']), 
+                    float(monthly_stats['half_days']),
+                    float(monthly_stats['attendance_percentage']),
+                    # Update için aynı değerler
+                    float(monthly_stats['total_work_hours']), 
+                    float(monthly_stats['total_overtime_hours']), 
+                    float(monthly_stats['total_absence_hours']),
+                    int(monthly_stats['absent_days']), 
+                    float(monthly_stats['average_daily_work_hours']),
+                    calendar.monthrange(year, month)[1],  # Toplam iş günü
+                    float(monthly_stats['worked_days']), 
+                    float(monthly_stats['half_days']),
+                    float(monthly_stats['attendance_percentage']),
+                ))
+
+                connection.commit()
+                return True
+
+    except Exception as e:
+        connection.rollback()
+        print(f"Kaydetme sırasında hata oluştu: {e}")
+        return False
+    
+
+    finally:
+        connection.close()
+
+
+
+
+
 import unicodedata
 
 def arrangeText(self, text:str) -> str:

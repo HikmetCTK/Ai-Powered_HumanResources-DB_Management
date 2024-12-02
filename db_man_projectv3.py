@@ -646,11 +646,12 @@ def create_special_request(employee_id, request_type, request_amount=None, descr
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
-        print(f"Özel talep oluşturulurken hata: {e}")
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
+        
     
 
 
@@ -671,7 +672,10 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
         return str(e)
 
     finally:
+        cursor.close()
         connection.close
+
+
 
 def process_special_request(request_id, status, approved_by, description=None):#Yönetici talebi onaylar veya ret eder
     
@@ -697,6 +701,7 @@ def process_special_request(request_id, status, approved_by, description=None):#
         return False
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -717,6 +722,7 @@ def get_employee_special_requests_history(employee_id):#ID'si verilen çalışan
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -759,6 +765,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date, descript
         return str(e)
 
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -780,6 +787,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
         return str(e)
     
     finally:
+        cursor.close()
         connection.close
 
     
@@ -809,6 +817,7 @@ def process_leave_request(leave_request_id, status_of_leave_request, approved_by
         return False
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -829,10 +838,10 @@ def get_employee_leave_history(employee_id):#ID'si verilen çalışanın izin ge
             cursor.execute(sql, (employee_id,))
             return cursor.fetchall()
     except Exception as e:
-        print(f"İzin geçmişi getirilirken hata: {e}")
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -861,6 +870,7 @@ def calculate_employee_paid_leaves(employee_id):#ID'si verilen çalışanın tü
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -934,11 +944,12 @@ def create_monthly_work(employee_id, work_year, work_month,
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
-        print(f"Özel talep oluşturulurken hata: {e}")
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
+
 
 
 def get_monthly_work(work_month):#İstenen günkü tüm çalışan verilerini getirir
@@ -954,11 +965,12 @@ def get_monthly_work(work_month):#İstenen günkü tüm çalışan verilerini ge
             cursor.execute(sql,(work_month))
             return cursor.fetchall()
     except Exception as e:
-        print(f"Bekleyen özel talepler getirilirken hata: {e}")
         return str(e)
 
     finally:
+        cursor.close()
         connection.close
+
 
 
 def get_employee_monthly_history(employee_id):#ID'si verilen çalışanın aylık çalışma geçmişini getirir.
@@ -974,10 +986,10 @@ def get_employee_monthly_history(employee_id):#ID'si verilen çalışanın aylı
             cursor.execute(sql, (employee_id,))
             return cursor.fetchall()
     except Exception as e:
-        print(f"Özel talep geçmişi getirilirken hata: {e}")
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -1020,10 +1032,10 @@ def calculate_salary(employee_id,work_month,hour_salary,overtime_salary):#Basit 
 
 
         except Exception as e:
-            print(f"Özel talep geçmişi getirilirken hata: {e}")
             return str(e)
         
         finally:
+            cursor.close()
             connection.close()
     
     else:
@@ -1117,10 +1129,10 @@ def add_daily_working_hours(employee_id, work_date, attendance, clock_in_time,
 
     except Exception as e:
         connection.rollback()
-        print(f"Özel talep oluşturulurken hata: {e}")
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -1137,11 +1149,11 @@ def get_today_working_hours(work_date):#İstenen günkü tüm çalışan veriler
             cursor.execute(sql,(work_date))
             return cursor.fetchall()
     except Exception as e:
-        print(f"Bekleyen özel talepler getirilirken hata: {e}")
         return str(e)
 
     finally:
-        connection.close
+        cursor.close()
+        connection.close()
 
 
 def get_employee_working_hours_history(employee_id):#ID'si verilen çalışanın çalışma geçmişini getirir.
@@ -1161,6 +1173,7 @@ def get_employee_working_hours_history(employee_id):#ID'si verilen çalışanın
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -1242,7 +1255,9 @@ def calculate_monthly_work_statistics(employee_id, year, month):#Bu kod günlük
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
+        
 
 def save_monthly_analysis(employee_id, year, month):#Aylık verileri günlüğe çevirip database'e kayıt ediyor
 
@@ -1308,6 +1323,7 @@ def save_monthly_analysis(employee_id, year, month):#Aylık verileri günlüğe 
     
 
     finally:
+        cursor.close()
         connection.close()
 
 

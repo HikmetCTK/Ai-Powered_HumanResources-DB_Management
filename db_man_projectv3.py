@@ -379,22 +379,22 @@ def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütun
         cursor.close()
         connection.close()
         
-def send_message_anyone(from_id,employee_ids,message): #for both side ##^^##
+def send_message_anyone(from_id,employee_ids,message,subject): #for both side ##^^##
     try:
         connection=connect()
         with connection.cursor() as cursor:
 
             
             query = """ 
-            INSERT INTO messages (from_emp_id, to_emp_id, message_text) 
-            VALUES (%s, %s, %s);
+            INSERT INTO messages (from_emp_id,to_emp_id,message_text,subject) 
+            VALUES (%s, %s, %s,%s);
             """
 
             # Prepare recipient tuples
-            recipients = [(from_id, emp_id, message) for emp_id in employee_ids]
+            recipients = [(from_id, emp_id, message,subject) for emp_id in employee_ids]
             
             cursor.executemany(query, recipients)
-            #connection.commit()              
+            connection.commit()              
 
             return "Messages sent successfully!" #message alert
 
@@ -404,8 +404,9 @@ def send_message_anyone(from_id,employee_ids,message): #for both side ##^^##
     finally:
         cursor.close()
         connection.close()
-    
-#send_message_anyone(3,[8],"this is single message attempting")
+        
+#send_message_anyone(3,[8],"this is single message attempting2","acil!!")
+
 def see_message(emp_id): # for both side  ##^^##
     
     """ emp id is taken from login form to see messages which are sent to him. """
@@ -413,7 +414,7 @@ def see_message(emp_id): # for both side  ##^^##
         connection=connect()
         with connection.cursor() as cursor:
             
-            query="""select  m.id,e.first_name,e.last_name,m.message_text,m.message_date from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s; 
+            query="""select  m.id,e.first_name,e.last_name,m.message_text,m.message_date,m.subject from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s; 
 """
             cursor.execute(query,(emp_id))
             messages=cursor.fetchall()
@@ -421,7 +422,7 @@ def see_message(emp_id): # for both side  ##^^##
             """
             ---- you can use this if you want to access each message information ----
             messages = records[0] 
-            for (id, name, surname, text, date) in messages:
+            for (id, name, surname, text, date,subject) in messages:
              """
             return messages
     except Exception as e:
@@ -433,20 +434,21 @@ def see_message(emp_id): # for both side  ##^^##
         
         connection.close()
         
-#records=see_message(7) # id si 7 olan kişiye  gelen mesajlar. 
+records=see_message(8) # id si 8 olan kişiye  gelen mesajlar. 
 
 """  output format
-(((6,
-   'Bradan',
-   'Beisley',
-   'this is single message attempting',
-   datetime.datetime(2024, 11, 27, 0, 7, 24)),
-  (7,
-   'Bradan',
-   'Beisley',
-   'this is single message attempting',
-   datetime.datetime(2024, 11, 27, 0, 18, 44))),
- 1)
+((10,
+  'Bradan',
+  'Beisley',
+  'this is single message attempting',
+  datetime.datetime(2024, 11, 27, 0, 34, 44),
+  None),
+ (19,
+  'Bradan',
+  'Beisley',
+  'this is single message attempting2',
+  datetime.datetime(2024, 12, 3, 0, 56, 1),
+  'acil!!'))
  """
 # Mark a message as sent
 def mark_message_as_read(message_id): ##^^##
@@ -455,7 +457,7 @@ def mark_message_as_read(message_id): ##^^##
         connection = connect()  
         with connection.cursor() as cursor:
 
-            query = "UPDATE Messages SET is_read = TRUE WHERE id = %s"
+            query = "UPDATE messages SET is_read = TRUE WHERE id = %s"
             cursor.execute(query, (message_id,))
             connection.commit()
     except Exception as e:

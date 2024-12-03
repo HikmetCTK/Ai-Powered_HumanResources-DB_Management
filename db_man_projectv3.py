@@ -1361,6 +1361,8 @@ a=(4,
 selected=a
 employee_id,first_name,last_name,date_of_birth,gender,job_title,department,salary,hire_date,email,phone_number,password,is_active=get_infos_from_selected(selected) # listeden seçilen elemanı bu fonksiyona bağlamadan alttaki update çalışmaz !!!!!!
 """
+selected_person=tuple_list[0] #liste qt den gelmeli
+employee_id,first_name,last_name,date_of_birth,gender,job_title,department,salary,hire_date,email,phone_number,password,is_active=get_infos_from_selected(selected) # listeden seçilen elemanı bu fonksiyona bağlamadan alttaki update çalışmaz !!!!!!
 
 def update_employee(
 employee_id=employee_id,

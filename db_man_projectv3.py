@@ -634,7 +634,7 @@ def create_special_request(employee_id, request_type, request_amount=None,):#Ça
         with connection.cursor() as cursor:
             sql = """
             INSERT INTO special_requests 
-            (employee_id, request_type, request_amount, request_date, description) 
+            (employee_id, request_type, request_amount, request_date,) 
             VALUES (%s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (

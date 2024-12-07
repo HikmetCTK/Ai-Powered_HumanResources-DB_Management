@@ -625,7 +625,7 @@ send_pend_email(emails_not_sent)
 
 
 
-def create_special_request(employee_id, request_type, request_amount=None, description=None):#Çalışan id'si ile talep oluşturur
+def create_special_request(employee_id, request_type, request_amount=None,):#Çalışan id'si ile talep oluşturur
     
 
     connection = connect()
@@ -642,7 +642,6 @@ def create_special_request(employee_id, request_type, request_amount=None, descr
                 request_type, 
                 request_amount, 
                 date.today(), 
-                description
             ))
             connection.commit()
             return cursor.lastrowid
@@ -679,7 +678,7 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
 
 
 
-def process_special_request(request_id, status, approved_by, description=None):#Yönetici talebi onaylar veya ret eder
+def process_special_request(request_id, status, approved_by,):#Yönetici talebi onaylar veya ret eder
     
     connection = connect()
 
@@ -691,10 +690,9 @@ def process_special_request(request_id, status, approved_by, description=None):#
             SET status_of_special_request = %s, 
                 approved_by = %s, 
                 answer_date = %s,
-                description = COALESCE(%s, description)
             WHERE request_id = %s
             """
-            cursor.execute(sql, (status, approved_by, answer_date, description, request_id))
+            cursor.execute(sql, (status, approved_by, answer_date,request_id))
             connection.commit()
             return cursor.rowcount > 0
     except Exception as e:
@@ -731,7 +729,7 @@ def get_employee_special_requests_history(employee_id):#ID'si verilen çalışan
 
 '''İzin talepleri için'''
 
-def create_leave_request(employee_id, leave_type, start_date, end_date, description):#Çalışan id'si ile izin oluşturur
+def create_leave_request(employee_id, leave_type, start_date, end_date,):#Çalışan id'si ile izin oluşturur
 
 
     connection = connect()
@@ -746,7 +744,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date, descript
         with connection.cursor() as cursor:
             sql = """
             INSERT INTO employee_leaves 
-            (employee_id, request_date, leave_type, Start_date, end_date, total_dates, description, created_at) 
+            (employee_id, request_date, leave_type, Start_date, end_date, total_dates,created_at) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (
@@ -756,7 +754,6 @@ def create_leave_request(employee_id, leave_type, start_date, end_date, descript
                 start_date, 
                 end_date, 
                 total_days, 
-                description,
                 created_at
             ))
             connection.commit()
@@ -795,7 +792,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
     
 
 
-def process_leave_request(leave_request_id, status_of_leave_request, approved_by, description=None):#Yönetici izin talebini onaylar veya ret eder database'de status_of_leave_asking Enum type dikkat 
+def process_leave_request(leave_request_id, status_of_leave_request, approved_by):#Yönetici izin talebini onaylar veya ret eder database'de status_of_leave_asking Enum type dikkat 
     
     connection = connect()
 
@@ -807,10 +804,9 @@ def process_leave_request(leave_request_id, status_of_leave_request, approved_by
             SET status_of_leave_asking = %s, 
                 approved_by = %s, 
                 answer_date = %s,
-                description = COALESCE(%s, description)
             WHERE leave_request_id = %s
             """
-            cursor.execute(sql, (status_of_leave_request, approved_by, answer_date, description, leave_request_id))
+            cursor.execute(sql, (status_of_leave_request, approved_by, answer_date,leave_request_id))
             connection.commit()
             return cursor.rowcount > 0
     except Exception as e:

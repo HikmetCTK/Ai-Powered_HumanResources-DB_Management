@@ -678,7 +678,7 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
 
 
 
-def process_special_request(request_id, status, approved_by,):#Yönetici talebi onaylar veya ret eder
+def process_special_request(request_id, status, approved_by):#Yönetici talebi onaylar veya ret eder
     
     connection = connect()
 
@@ -729,7 +729,7 @@ def get_employee_special_requests_history(employee_id):#ID'si verilen çalışan
 
 '''İzin talepleri için'''
 
-def create_leave_request(employee_id, leave_type, start_date, end_date,):#Çalışan id'si ile izin oluşturur
+def create_leave_request(employee_id, leave_type, start_date, end_date):#Çalışan id'si ile izin oluşturur
 
 
     connection = connect()

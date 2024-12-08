@@ -265,21 +265,25 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
         connection.close()
 
 
-# (1, 'Alvin', 'Fernier', 3, 'gloves', datetime.datetime(1948, 5, 22, 2, 24, 37)) örnek çıktı 
-def assign_item_to_employee(assigned_list):
+def assign_item_to_employee(id,item_id,quantity):
     connection=connect()
-    selected_emp=assigned_list[1] # buraya qt widget list gelmeli  >>>FEVZİ<<<
+    
     try:
         with connection.cursor() as cursor:
-            emp_id=selected_emp[0]  #id çekme işlemi
-            item_id=selected_emp[3] #item_id
-            query="insert into employee_items(employee_id,item_id,assignment_date) values(%s,%s,NOW())"
-            cursor.execute(query,(emp_id,item_id))
+            emp_id=id  #id çekme işlemi
+            item_id=item_id #item_id
+            quantity=quantity
+            query="insert into employee_items(employee_id,item_id,assignment_date,quantity) values(%s,%s,NOW(),%s)"
+            cursor.execute(query,(emp_id,item_id,quantity))
+            substract_query="update items set quantity=quantity - %s where id=%s"
+            cursor.execute(substract_query,(quantity,item_id))
             connection.commit()
     except pymysql.MySQLError as e:
         return str(e)
     finally:
         connection.close()
+
+#assign_item_to_employee(3,2,50) # 3 numaralı personelin 2 numaralı itemi 50 adet alması
 
 
 def remove_item_from_employee(assigned_list):

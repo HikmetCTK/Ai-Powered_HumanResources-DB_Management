@@ -172,17 +172,15 @@ def load_employee():  #load  id,name,surname of employees
 
 
 
-def not_working(selected_employee): #changes employees is_active value 1 to 0
-    selected_employee=employe_list[1] #selected_employee by user from list .!>>>FEVZİ BURAYI  DEĞİŞTİR 
+def not_working(selected_employee:int): #changes employees is_active value 1 to 0
     connection=connect()
     try:
         with connection.cursor() as cursor:
            query="update employees set is_active=0 where employee_id=%s"
-           employee_id=selected_employee[0]  #selecting id
-           cursor.execute(query,employee_id)
+           cursor.execute(query,selected_employee)
            connection.commit()
     except pymysql.MySQLError as e:
-        return str(e)       
+        return str(e)
     finally:
         connection.close()
 
@@ -346,19 +344,12 @@ def search_for_employee(search_term): #tabloya göre arama yapan fonksiyon
 
 def update_employee_salary(emp_id,new_salary):
     connection=connect()
-    try:          
-        if new_salary > 0:  
-            try:
-                with connection.cursor() as cursor:
-                    sql = "UPDATE employees SET salary = %s WHERE employee_id = %s"
-                    cursor.execute(sql, (new_salary, emp_id))
-                    connection.commit()
-            finally:
-                connection.close()
-        else: 
-            return "Invalid salary"
-            
-    except Exception as e: #deleted sys.exit(1)
+    try:
+        with connection.cursor() as cursor:
+            sql = "UPDATE employees SET salary = %s WHERE employee_id = %s"
+            cursor.execute(sql, (new_salary, emp_id))
+            connection.commit()
+    except Exception as e:
         return str(e)
     finally:
         cursor.close()
@@ -374,7 +365,7 @@ def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütun
         results=cursor.fetchall()
         return results
     except Exception as e:
-        return e
+        return str(e)
     finally:
         cursor.close()
         connection.close()
@@ -430,8 +421,6 @@ def see_message(emp_id): # for both side  ##^^##
 
     finally:
         cursor.close()
-        
-        
         connection.close()
         
 records=see_message(8) # id si 8 olan kişiye  gelen mesajlar. 
@@ -453,10 +442,8 @@ records=see_message(8) # id si 8 olan kişiye  gelen mesajlar.
 # Mark a message as sent
 def mark_message_as_read(message_id): ##^^##
     try:
-        
         connection = connect()  
         with connection.cursor() as cursor:
-
             query = "UPDATE messages SET is_read = TRUE WHERE id = %s"
             cursor.execute(query, (message_id,))
             connection.commit()
@@ -470,7 +457,6 @@ def mark_message_as_read(message_id): ##^^##
 
 def add_event(event_name,event_text,event_date): ##^^##
     try:
-        
         connection = connect()  
         with connection.cursor() as cursor:
             query="""insert into events_(event_name,event_text,event_date) values(%s,%s,%s)  """
@@ -479,7 +465,6 @@ def add_event(event_name,event_text,event_date): ##^^##
             return " event planned succesfully "
     except Exception as e:
         return str(e)
-    
     finally:
         cursor.close()
         connection.close()
@@ -506,8 +491,6 @@ def see_events(): ##^^##
 
     finally:
         cursor.close()
-        
-        
         connection.close()
 
         
@@ -1398,12 +1381,11 @@ def update_employee(employee_id, first_name, last_name, date_of_birth, gender, j
 
             connection.commit()
             return cursor.lastrowid
-
-            
+           
     except Exception as e:
         connection.rollback()
         return str(e)
-
+        
     finally:
             cursor.close()
             connection.close()

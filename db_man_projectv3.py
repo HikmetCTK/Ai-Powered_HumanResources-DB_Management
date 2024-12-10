@@ -346,12 +346,8 @@ def search_for_employee(search_term): #tabloya göre arama yapan fonksiyon
 
 def update_employee_salary(emp_id,new_salary):
     connection=connect()
-    try:
-        emp_id = emp_id
-        new_salary = new_salary
-        
-           
-        if new_salary > int(0):  
+    try:          
+        if new_salary > 0:  
             try:
                 with connection.cursor() as cursor:
                     sql = "UPDATE employees SET salary = %s WHERE employee_id = %s"
@@ -360,7 +356,7 @@ def update_employee_salary(emp_id,new_salary):
             finally:
                 connection.close()
         else: 
-            print('Geçersiz değer girildi')
+            return "Invalid salary"
             
     except Exception as e: #deleted sys.exit(1)
         return str(e)

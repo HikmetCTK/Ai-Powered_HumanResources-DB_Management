@@ -1398,3 +1398,12 @@ def arrangeText(self, text:str) -> str:
     text = unicodedata.normalize('NFKD', text).casefold()
     arranged =  re.sub(r'\W+', '', text).casefold()
     return arranged
+
+def generateRandomPassword(self, length:int) -> str:
+    from random import choice
+    import string
+
+    characters = string.ascii_letters + string.digits
+    password = ''.join(choice(characters) for i in range(length))
+    return password
+

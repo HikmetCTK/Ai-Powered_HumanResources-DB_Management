@@ -288,15 +288,38 @@ def assign_item_to_employee(id,item_id,quantity):
 #assign_item_to_employee(3,2,50) # 3 numaralı personelin 2 numaralı itemi 50 adet alması
 
 
+# employee_id, first_name, last_name, item_id, item_name, assignment_date
+assigned_list=[
+('1', 'Alvin', 'Fernier', '5', 'Welding Machine', '2010-07-27 11:54:10')
+]
+
+#örnek liste formatı direkt selected_emp olarakta işlem yapılabilir @FEVZİ
 def remove_item_from_employee(assigned_list):
     connection=connect()
-    selected_emp=assigned_list[1] # buraya qt widget list gelmeli  >>>FEVZİ<<<
+    selected_emp=assigned_list[0] # buraya qt widget list gelmeli  >>>FEVZİ<<<
     print(selected_emp)
+    item_id=selected_emp[3]
     try:
         with connection.cursor() as cursor:
-            assign_date=selected_emp[5]  #id çekme işlemi
-            query="delete from employee_items where assignment_date=%s"
-            cursor.execute(query,(assign_date,))
+            assign_date = selected_emp[5]  # id çekme işlemi
+            quantity_query = "select quantity from employee_items where assignment_date=%s"
+            cursor.execute(quantity_query, (assign_date,))
+            result = cursor.fetchone()
+            
+            if result is None:
+                return f"No records found for assignment date: {assign_date}"
+            
+            quantity = result[0]
+            print(quantity)
+            
+            # Delete the record
+            query = "delete from employee_items where assignment_date=%s"
+            cursor.execute(query, (assign_date,))
+            
+            # Update the quantity in the items table
+            add_query = "update items set quantity=quantity + %s where id=%s"
+            cursor.execute(add_query, (quantity, item_id))
+            
             connection.commit()
             print(f"Deleted records with assignment date: {assign_date}")
     except pymysql.MySQLError as e:

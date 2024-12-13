@@ -598,7 +598,65 @@ def send_pend_email(records):
         return e
     
 
+import datetime
+from decimal import Decimal
+def send_email(records,email_title,email_description,from_emp_id,from_name,from_surname,from_role):
+    for record in records:
+        print(record)
+        to_email = record[9]
+        print(to_email)
+        if not to_email:
+            return f"No email found for employee ID: {to_emp_id}"
+        #to_name = record[1]
+        #to_surname = record[2]
+        email_title=email_title
+        email_description=email_description
+        #to_role=record[5]
+        to_emp_id=record[0]
+        sender_email ='gmail'
+        sender_password="pswrd"
+        # Create email
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = to_email
+        msg['Subject'] = email_title
+        body_with_footer = f"{email_description}\n\n{from_name} {from_surname} - {from_role}"
+        msg.attach(MIMEText(body_with_footer, 'plain', 'utf-8'))
 
+        try:
+            # Send email
+            with smtplib.SMTP("smtp.gmail.com",587) as smtp:
+                smtp.starttls()
+                smtp.login(sender_email,sender_password)
+                smtp.sendmail(sender_email, to_email, msg.as_string())
+            
+            # Update database on success
+            try:
+                connection = connect()
+                with connection.cursor() as cursor:
+                    query = "insert into email(email_title, email_description, from_emp_id, to_emp_id)values(%s,%s,%s,%s)"
+                    cursor.execute(query, (email_title, email_description, from_emp_id, to_emp_id))
+                    connection.commit()
+                return "Email sent and status updated in database."
+            except Exception as e:
+                return f"Error updating database: {e}"
+        except Exception as e:
+            return f"Error sending email: {e}"
+
+"""datas=[(1,
+  'Alvin',
+  'Fernier',
+  datetime.date(1967, 9, 18),
+  'Male',
+  'Human resources',
+  'IT',
+  Decimal('31980.52'),
+  datetime.date(2017, 9, 7),
+  'hikmetcatak99@gmail.com',
+  '243-979-3929',
+  '123',
+  1)]
+send_email(datas,"DENEMEv2-title","denev2-description",3,"hkmt","ctk","Ai eng")"""
 
 
 """

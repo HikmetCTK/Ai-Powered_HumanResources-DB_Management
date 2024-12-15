@@ -267,6 +267,7 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
         connection.close()
 
 
+
 def assign_item_to_employee(id,item_id,quantity):
     connection=connect()
     
@@ -275,11 +276,19 @@ def assign_item_to_employee(id,item_id,quantity):
             emp_id=id  #id çekme işlemi
             item_id=item_id #item_id
             quantity=quantity
-            query="insert into employee_items(employee_id,item_id,assignment_date,quantity) values(%s,%s,NOW(),%s)"
-            cursor.execute(query,(emp_id,item_id,quantity))
-            substract_query="update items set quantity=quantity - %s where id=%s"
-            cursor.execute(substract_query,(quantity,item_id))
-            connection.commit()
+            remain_quantity_query="select quantity from items where id =%s"
+            cursor.execute(remain_quantity_query,(item_id))
+            remain_quantity=cursor.fetchone()
+
+            if remain_quantity[0]>=quantity: #stok atanandan fazlaysa update database günceller 
+
+                query="insert into employee_items(employee_id,item_id,assignment_date,quantity) values(%s,%s,NOW(),%s)"
+                cursor.execute(query,(emp_id,item_id,quantity))
+                substract_query="update items set quantity=quantity - %s where id=%s"  #stoktan atanan ürün  sayısı kadar düşer
+                cursor.execute(substract_query,(quantity,item_id))
+                connection.commit()
+            else:
+                return "not enough product"
     except pymysql.MySQLError as e:
         return str(e)
     finally:

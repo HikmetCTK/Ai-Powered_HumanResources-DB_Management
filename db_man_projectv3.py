@@ -229,7 +229,43 @@ def  add_item(item_name,quantity):
         return str (e)
     finally:
         connection.close()
-    
+
+#selected_item format =('1', 'hammer', '37')
+
+def update_quantity_add(selected_item,add_quantity):
+    connection=connect()
+    item_id=selected_item[0] #item id çekme işlemi
+    try:
+        with connection.cursor() as cursor:
+            
+            item_id=item_id #item_id
+            add_query="update items set quantity=quantity + %s where id=%s"
+            cursor.execute(add_query,(add_quantity,item_id))
+            connection.commit()
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
+
+
+#selected_item format =('1', 'hammer', '37')
+def update_quantity_sub(selected_item,sub_quantity):
+    connection=connect()
+    item_id=selected_item[0] 
+    try:
+        with connection.cursor() as cursor:
+
+            substract_query="update items set quantity=quantity - %s where id=%s"
+            cursor.execute(substract_query,(sub_quantity,item_id))
+            connection.commit()
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
+
+
+
+
 #add_item('Chip',250) #^^# onaylandı
 def delete_item(item_id): #id yazınca  itemi silen fonksiyon 
     connection=connect()

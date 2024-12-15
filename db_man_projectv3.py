@@ -301,27 +301,27 @@ def remove_item_from_employee(assigned_list):
     item_id=selected_emp[3]
     try:
         with connection.cursor() as cursor:
-            assign_date = selected_emp[5]  # id çekme işlemi
-            quantity_query = "select quantity from employee_items where assignment_date=%s"
-            cursor.execute(quantity_query, (assign_date,))
+            assign_id = selected_emp[5]  # id çekme işlemi
+            quantity_query = "select quantity from employee_items where assign_id=%s"
+            cursor.execute(quantity_query, (assign_id,))
             result = cursor.fetchone()
             
             if result is None:
-                return f"No records found for assignment date: {assign_date}"
+                return f"No records found for assignment id: {assign_id}"
             
             quantity = result[0]
-            print(quantity)
+            
             
             # Delete the record
-            query = "delete from employee_items where assignment_date=%s"
-            cursor.execute(query, (assign_date,))
+            query = "delete from employee_items where assign_id=%s"
+            cursor.execute(query, (assign_id,))
             
             # Update the quantity in the items table
             add_query = "update items set quantity=quantity + %s where id=%s"
             cursor.execute(add_query, (quantity, item_id))
             
             connection.commit()
-            print(f"Deleted records with assignment date: {assign_date}")
+            
     except pymysql.MySQLError as e:
         return str(e)
     finally:

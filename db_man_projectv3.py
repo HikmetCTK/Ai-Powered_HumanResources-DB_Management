@@ -266,7 +266,37 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
     finally:
         connection.close()
 
+def remain_quantity(item_id): #return integer value which is remain stock by item_id
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
 
+            remain_quantity_query="select quantity from items where id =%s"
+            cursor.execute(remain_quantity_query,(item_id))
+            remain_quantity=cursor.fetchone()
+            return remain_quantity[0]
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
+
+def assign_item_to_employee_no_checking(id,item_id,quantity): # assign item to employee not checking stock
+    connection=connect()
+    
+    try:
+        with connection.cursor() as cursor:
+            emp_id=id  #id çekme işlemi
+            item_id=item_id #item_id
+            quantity=quantity
+            query="insert into employee_items(employee_id,item_id,assignment_date,quantity) values(%s,%s,NOW(),%s)"
+            cursor.execute(query,(emp_id,item_id,quantity))
+            substract_query="update items set quantity=quantity - %s where id=%s"
+            cursor.execute(substract_query,(quantity,item_id))
+            connection.commit()
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
 
 def assign_item_to_employee(id,item_id,quantity):
     connection=connect()
@@ -295,6 +325,7 @@ def assign_item_to_employee(id,item_id,quantity):
         connection.close()
 
 #assign_item_to_employee(3,2,50) # 3 numaralı personelin 2 numaralı itemi 50 adet alması
+
 
 
 # employee_id, first_name, last_name, item_id, item_name, assignment_date

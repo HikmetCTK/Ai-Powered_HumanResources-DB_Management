@@ -727,6 +727,33 @@ emails_not_sent=check_pend_email()
 send_pend_email(emails_not_sent)
 """
 
+def load_employee_for_message_selection(): #  for message interface
+    connection=connect()
+    try:
+
+        with connection.cursor() as cursor:
+            query="select employee_id, first_name, last_name, job_title,department from employees"
+            cursor.execute(query)
+            employees=cursor.fetchall()
+            return employees
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
+        
+def load_employee_for_adjustment():  #  for adjustment interface
+    connection=connect()
+    try:
+
+        with connection.cursor() as cursor:
+            query="select employee_id, first_name, last_name, job_title,department ,salary from employees"
+            cursor.execute(query)
+            employees=cursor.fetchall()
+            return employees
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        connection.close()
 
 
 '''ÖZEL TALEPLER'''

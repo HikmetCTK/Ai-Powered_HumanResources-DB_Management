@@ -1049,6 +1049,53 @@ def calculate_employee_paid_leaves(employee_id):#ID'si verilen çalışanın tü
 
 
 
+
+def process_request(table_name, request_id_column, request_id_value, status_value, approved_by):
+    "Beyler status sütunu ismi değişecek bu ile status_of_request   !!!!!!!!!!!!!!!!"
+    connection = connect()
+
+    try:
+        with connection.cursor() as cursor:
+            answer_date = date.today()
+            
+            # Dinamik SQL sorgusu (parametre kullanımı)
+            sql = """
+            UPDATE {} 
+            SET status_of_request = %s,
+                approved_by = %s,
+                answer_date = %s
+            WHERE {} = %s
+            """
+            
+            # Parametreleri sırala
+            cursor.execute(sql.format(
+                connection.escape_string(table_name), 
+                connection.escape_string(request_id_column)
+            ), (
+                status_value, 
+                approved_by, 
+                answer_date, 
+                request_id_value
+            ))
+
+            connection.commit()
+            return cursor.rowcount > 0
+    
+    except Exception as e:
+        connection.rollback()
+        print(f"Hata: {e}")
+        return False
+    
+    finally:
+        cursor.close()
+        connection.close()
+
+
+
+
+
+
+
 '''Aylık tablo için'''
 
 

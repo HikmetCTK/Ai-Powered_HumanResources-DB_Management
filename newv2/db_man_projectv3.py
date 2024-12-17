@@ -36,6 +36,7 @@ def connection_check():
 
     else:
         # If it does not encounter any error, close the connection.
+        cursor.close()
         connection.close()
         return (True, None)
 
@@ -74,7 +75,7 @@ def login(email,password): #id eklendi yeni login fonk
         return str(e)
     
     finally:
-       
+       cursor.close()
         connection.close()
 """
 if connection:
@@ -132,6 +133,7 @@ def reset_change_password(new_password, entered_code, verification_code, user_em
         except pymysql.MySQLError as e:
             return str(e)
         finally:
+            cursor.close()
             connection.close()
             
     else:
@@ -171,6 +173,7 @@ def load_employee():  #load  id,name,surname of employees
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -185,6 +188,7 @@ def not_working(selected_employee:int): #changes employees is_active value 1 to 
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 #load_employee()
@@ -212,6 +216,7 @@ def load_infos(table_name): #^^# Brings all records from specific table
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 # load_infos('items') #sample usage
 
@@ -226,6 +231,7 @@ def  add_item(item_name,quantity):
     except pymysql.MySQLError as e:
         return str (e)
     finally:
+        cursor.close()
         connection.close()
 
 #selected_item format =('1', 'hammer', '37')
@@ -243,6 +249,7 @@ def update_quantity_add(selected_item,add_quantity):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -259,6 +266,7 @@ def update_quantity_sub(selected_item,sub_quantity):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -277,6 +285,7 @@ def delete_item(item_id): #id yazınca  itemi silen fonksiyon
     except pymysql.MySQLError as e:
         return str (e)
     finally:
+        cursor.close()
         connection.close()
 #delete_item(14)
 
@@ -298,6 +307,7 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
 def remain_quantity(item_id): #return integer value which is remain stock by item_id
@@ -312,6 +322,7 @@ def remain_quantity(item_id): #return integer value which is remain stock by ite
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 def assign_item_to_employee_no_checking(id,item_id,quantity): # assign item to employee not checking stock
@@ -330,6 +341,7 @@ def assign_item_to_employee_no_checking(id,item_id,quantity): # assign item to e
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 def assign_item_to_employee(id,item_id,quantity):
@@ -356,6 +368,7 @@ def assign_item_to_employee(id,item_id,quantity):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 #assign_item_to_employee(3,2,50) # 3 numaralı personelin 2 numaralı itemi 50 adet alması
@@ -399,6 +412,7 @@ def remove_item_from_employee(assigned_list):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
@@ -419,8 +433,28 @@ def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini al�
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
+def show_assigned_items_employee_side(emp_id): #^^# kullanıcıya ait zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
+    connection=connect()
+    #selected_emp=assigned_list[1]
+    query="""select i.item_name,ei.quantity,ei.assignment_date from employee_items ei 
+    join items i on ei.item_id=i.id 
+    where ei.employee_id=%s
+    """
+    try:
+        with connection.cursor() as cursor:
+
+            cursor.execute(query,(emp_id,))
+            resultss=cursor.fetchall()
+            return resultss
+    
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
 
 
 
@@ -439,6 +473,7 @@ def search_for_employee(search_term): #tabloya göre arama yapan fonksiyon
     except pymysql.MySQLError as e:
             return str(e)
     finally:
+            cursor.close()
             connection.close()
 
 
@@ -778,6 +813,7 @@ def load_employee_for_message_selection(search_term=""): #  for message interfac
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 def load_employee_for_adjustment():  #  for adjustment interface
     connection=connect()
@@ -791,6 +827,7 @@ def load_employee_for_adjustment():  #  for adjustment interface
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -847,7 +884,7 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
 
     finally:
         cursor.close()
-        connection.close
+        connection.close()
 
 
 
@@ -960,7 +997,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
     
     finally:
         cursor.close()
-        connection.close
+        connection.close()
 
     
 
@@ -1140,7 +1177,7 @@ def get_monthly_work(work_month):#İstenen günkü tüm çalışan verilerini ge
 
     finally:
         cursor.close()
-        connection.close
+        connection.close()
 
 
 

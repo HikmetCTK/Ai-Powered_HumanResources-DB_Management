@@ -40,9 +40,9 @@ Leave Definitions ✔
 Employee Side:
 
 
-Viewing Their Information and Statistics
+Viewing Their Information and Statistics ✔
 
-Viewing General Announcements and Events
+Viewing General Announcements and Events ✔
 
 Leave Request System
 
@@ -50,7 +50,7 @@ Advance Request System
 
 Expense Reimbursement Request System
 
-Viewing Items Assigned to Them
+Viewing Items Assigned to Them ✔
 
 
 

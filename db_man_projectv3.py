@@ -796,7 +796,7 @@ def load_employee_for_adjustment():  #  for adjustment interface
 
 
 
-def create_special_request(employee_id, request_type, request_amount=None,):#Çalışan id'si ile talep oluşturur
+def create_special_request(employee_id, request_type, request_amount=None, description=None):#Çalışan id'si ile talep oluşturur
     
 
     connection = connect()
@@ -805,7 +805,7 @@ def create_special_request(employee_id, request_type, request_amount=None,):#Ça
         with connection.cursor() as cursor:
             sql = """
             INSERT INTO special_requests 
-            (employee_id, request_type, request_amount, request_date,) 
+            (employee_id, request_type, request_amount, request_date, description) 
             VALUES (%s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (
@@ -813,11 +813,13 @@ def create_special_request(employee_id, request_type, request_amount=None,):#Ça
                 request_type, 
                 request_amount, 
                 date.today(), 
+                description
             ))
             connection.commit()
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
+        print(f"Özel talep oluşturulurken hata: {e}")
         return str(e)
     
     finally:
@@ -835,7 +837,7 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
         with connection.cursor() as cursor:
             sql = """
             SELECT * FROM special_requests 
-            WHERE status_of_special_request = 'Beklemede'
+            WHERE status_of_special_request = 'Pending'
             """
             cursor.execute(sql)
             return cursor.fetchall()
@@ -900,7 +902,7 @@ def get_employee_special_requests_history(employee_id):#ID'si verilen çalışan
 
 '''İzin talepleri için'''
 
-def create_leave_request(employee_id, leave_type, start_date, end_date):#Çalışan id'si ile izin oluşturur
+def create_leave_request(employee_id, leave_type, start_date, end_date, description):#Çalışan id'si ile izin oluşturur
 
 
     connection = connect()
@@ -915,7 +917,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date):#Çalı�
         with connection.cursor() as cursor:
             sql = """
             INSERT INTO employee_leaves 
-            (employee_id, request_date, leave_type, Start_date, end_date, total_dates,created_at) 
+            (employee_id, request_date, leave_type, Start_date, end_date, total_dates, description, created_at) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (
@@ -925,6 +927,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date):#Çalı�
                 start_date, 
                 end_date, 
                 total_days, 
+                description,
                 created_at
             ))
             connection.commit()
@@ -940,6 +943,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date):#Çalı�
 
 
 
+
 def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
     
     connection = connect()
@@ -948,7 +952,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
         with connection.cursor() as cursor:
             sql = """
             SELECT * FROM employee_leaves 
-            WHERE status_of_leave_asking = 'Beklemede'
+            WHERE status_of_leave_asking = 'Pending'
             """
             cursor.execute(sql)
             return cursor.fetchall()
@@ -1025,7 +1029,7 @@ def calculate_employee_paid_leaves(employee_id):#ID'si verilen çalışanın tü
             sql = """
             SELECT sum(total_dates) AS sum_total 
             FROM employee_leaves 
-            WHERE employee_id = %s AND leave_type NOT IN ('Ücretsiz İzin') AND status_of_leave_asking IN ('Onaylandı')
+            WHERE employee_id = %s AND leave_type NOT IN ('Unpaid Leave') AND status_of_leave_asking IN ('Approved')
             """
             cursor.execute(sql, (employee_id,))
             result = cursor.fetchone() # bu kod Decimal('20') bu şekilde bir değer döndürür önce type sonra rakam

@@ -540,7 +540,25 @@ def see_message(emp_id): # for both side  ##^^##
         cursor.close()
         connection.close()
         
-records=see_message(8) # id si 8 olan kişiye  gelen mesajlar. 
+def see_messagev2(emp_id): # for both side  Provide sending message to sender #^^#
+    
+    """ emp id is taken from login form to see messages which are sent to him. """
+    try:
+        connection=connect()
+        with connection.cursor() as cursor:
+            
+            query="select  m.id,e.first_name,e.last_name,m.message_text,m.message_date,m.subject,m.from_emp_id from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s;"
+            cursor.execute(query,(emp_id))
+            messages=cursor.fetchall()
+            
+
+            return messages
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+        connection.close()
 
 """  output format
 ((10,

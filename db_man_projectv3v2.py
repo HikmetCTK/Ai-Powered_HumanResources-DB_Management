@@ -57,13 +57,14 @@ def login(email,password): #id eklendi yeni login fonk
             id=record[0]
             name=record[1]
             surname=record[2]
+            
             if record:
                 role=record[5]
                 # If str returns, then it is either 'Human Resources' or 'Employee'
                 if role=='Human resources':
-                    return "Human resources",id,name,surname
+                    return role,id,name,surname
                 else:
-                    return "Employee",id,name,surname
+                    return role,id,name,surname
             else:
                 # If None returns, then it means that login failed
                 return None
@@ -740,8 +741,7 @@ def send_email(records,email_title,email_description,from_emp_id,from_name,from_
             return f"No email found for employee ID: {to_emp_id}"
         #to_name = record[1]
         #to_surname = record[2]
-        email_title=email_title
-        email_description=email_description
+
         #to_role=record[5]
         to_emp_id=record[0]
         sender_email ='gmail'

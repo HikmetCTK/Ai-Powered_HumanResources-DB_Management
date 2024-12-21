@@ -804,8 +804,9 @@ def load_employee_for_message_selection(search_term=""): #  for message interfac
             query="""select employee_id,
             first_name, 
             last_name, 
+            department,
             job_title,
-            department from employees where first_name like %s or  last_name=%s """
+            email from employees where first_name like %s or  last_name=%s """
             cursor.execute(query, (f"%{search_term}%", f"%{search_term}%"))
             employees=cursor.fetchall()
             return employees

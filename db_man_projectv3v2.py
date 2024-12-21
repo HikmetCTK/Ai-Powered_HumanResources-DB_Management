@@ -286,20 +286,19 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
     
     try:
         with connection.cursor() as cursor:
-            query="select employee_id,first_name,last_name,item_id,item_name,assignment_date from employee_items_with_names"
+            query="select * from employee_items_with_names"
             cursor.execute(query)
             employee_item_list=cursor.fetchall()
-            
-            for emp_item in employee_item_list:
-                assigned_list.append(emp_item)
+            return employee_item_list
 
     except pymysql.MySQLError as e:
         return str(e)
     
     finally:
+        cursor.close()
         connection.close()
 
-def remain_quantity(item_id): #return integer value which is remain stock by item_id
+def remain_quantity(item_id): #return integer value which is remain stock by item_id. For employee
     connection=connect()
     try:
         with connection.cursor() as cursor:

@@ -397,8 +397,38 @@ def remove_item_from_employee(assigned_list):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
-
+def remove_item_from_selected_employee(assign_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            quantity_query = "select quantity from employee_items where assign_id=%s"
+            cursor.execute(quantity_query, (assign_id,))
+            result = cursor.fetchone()
+            print(result)
+            if result is None:
+                return f"No records found for assignment id: {assign_id}"
+            quantity = result[0]
+            item_id=result[1]
+            
+            
+            # Delete the record
+            query = "delete from employee_items where assign_id=%s"
+            cursor.execute(query, (assign_id,))
+            
+            # Update the quantity in the items table
+            add_query = "update items set quantity=quantity + %s where id=%s"
+            cursor.execute(add_query, (quantity, item_id))
+            
+            connection.commit()
+            
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+    
 def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
     connection=connect()
     selected_emp=assigned_list[1]
@@ -417,6 +447,7 @@ def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini al�
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 def show_assigned_items_employee_side(emp_id): #^^# kullanıcıya zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
@@ -436,6 +467,7 @@ def show_assigned_items_employee_side(emp_id): #^^# kullanıcıya zimmetli eşya
     except pymysql.MySQLError as e:
         return str(e)
     finally:
+        cursor.close()
         connection.close()
 
 
@@ -455,6 +487,7 @@ def search_for_employee(search_term): #tabloya göre arama yapan fonksiyon
     except pymysql.MySQLError as e:
             return str(e)
     finally:
+            cursor.close()
             connection.close()
 
 

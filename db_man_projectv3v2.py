@@ -286,7 +286,7 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
     
     try:
         with connection.cursor() as cursor:
-            query="select * from employee_items_with_names"
+            query="select  assign_id,employee_id, first_name, last_name, item_id, item_name, quantity, assignment_date from employee_items_with_names"
             cursor.execute(query)
             employee_item_list=cursor.fetchall()
             return employee_item_list
@@ -362,7 +362,7 @@ def assign_item_to_employee(id,item_id,quantity):
 
 # employee_id, first_name, last_name, item_id, item_name, assignment_date
 """assigned_list=[
-('1', 'Alvin', 'Fernier', '5', 'Welding Machine', '2010-07-27 11:54:10')
+('2', 'Hikmet', 'Catak', '2', 'helmet', '2', '312', '2024-12-17 00:49:19')
 ]"""
 
 #örnek liste formatı direkt selected_emp olarakta işlem yapılabilir @FEVZİ

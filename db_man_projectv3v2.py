@@ -548,7 +548,7 @@ def see_messagev2(emp_id): # for both side  Provide sending message to sender #^
         connection=connect()
         with connection.cursor() as cursor:
             
-            query="select  m.id,e.first_name,e.last_name,m.message_text,m.message_date,m.subject,m.from_emp_id from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s;"
+            query="select  m.id,e.first_name,e.last_name,m.subject,m.message_text,m.message_date,m.from_emp_id from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s;"
             cursor.execute(query,(emp_id))
             messages=cursor.fetchall()
             

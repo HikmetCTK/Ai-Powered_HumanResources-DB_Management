@@ -811,12 +811,12 @@ def load_employee_for_message_selection(search_term=""): #  for message interfac
         return str(e)
     finally:
         connection.close()
-def load_employee_for_adjustment():  #  for adjustment interface
+def load_employee_for_salary_adjustment():  #  for adjustment interface
     connection=connect()
     try:
 
         with connection.cursor() as cursor:
-            query="select employee_id, first_name, last_name, job_title,department ,salary from employees"
+            query="select employee_id, first_name, last_name, department, job_title, salary from employees"
             cursor.execute(query)
             employees=cursor.fetchall()
             return employees

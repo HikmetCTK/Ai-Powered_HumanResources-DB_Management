@@ -733,16 +733,13 @@ def send_pend_email(records):
 import datetime
 from decimal import Decimal
 def send_email(records,email_title,email_description,from_emp_id,from_name,from_surname,from_role):
+    # Each sublist in records list includes 2 items; first is to_emp_id, second is to_email
     for record in records:
         print(record)
-        to_email = record[9]
+        to_email = record[1]
         print(to_email)
         if not to_email:
             return f"No email found for employee ID: {to_emp_id}"
-        #to_name = record[1]
-        #to_surname = record[2]
-
-        #to_role=record[5]
         to_emp_id=record[0]
         sender_email ='gmail'
         sender_password="pswrd"

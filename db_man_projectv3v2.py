@@ -1572,6 +1572,20 @@ def special_request_status_for_employee(employee_id):
     finally:
         cursor.close()
         connection.close()
+
+def pending_special_requests_for_employee(employee_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="select request_type,status_of_special_request,answer_date from special_requests where employee_id=%s and status_of_special_request=Pending"
+            cursor.execute(query,(employee_id))
+            records=cursor.fetchall()
+            return records
+    except  Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
         
 
 def leave_request_status_for_employee(employee_id):
@@ -1579,6 +1593,20 @@ def leave_request_status_for_employee(employee_id):
     try:
         with connection.cursor() as cursor:
             query="select leave_type,status_of_leave_asking,answer_date from employee_leaves where employee_id=%s"
+            cursor.execute(query,(employee_id))
+            records=cursor.fetchall()
+            return records
+    except  Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+
+def pending_leave_requests_for_employee(employee_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="select leave_type,status_of_leave_asking,answer_date from employee_leaves where employee_id=%s and status_of_leave_asking=Pending"
             cursor.execute(query,(employee_id))
             records=cursor.fetchall()
             return records

@@ -1563,7 +1563,7 @@ def special_request_status_for_employee(employee_id):
     connection=connect()
     try:
         with connection.cursor() as cursor:
-            query="select request_type,status_of_special_request,answer_date from special_requests where employee_id=%s"
+            query="select request_type,status_of_special_request,request_date,answer_date from special_requests where employee_id=%s"
             cursor.execute(query,(employee_id))
             records=cursor.fetchall()
             return records
@@ -1592,7 +1592,7 @@ def leave_request_status_for_employee(employee_id):
     connection=connect()
     try:
         with connection.cursor() as cursor:
-            query="select leave_type,status_of_leave_asking,answer_date from employee_leaves where employee_id=%s"
+            query="select leave_type,status_of_leave_asking,request_date,answer_date from employee_leaves where employee_id=%s"
             cursor.execute(query,(employee_id))
             records=cursor.fetchall()
             return records

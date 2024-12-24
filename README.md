@@ -44,9 +44,9 @@ Viewing Their Information and Statistics ✔
 
 Viewing General Announcements and Events ✔
 
-Leave Request System
+Leave Request System✔
 
-Advance Request System
+Advance Request System✔
 
 Expense Reimbursement Request System
 

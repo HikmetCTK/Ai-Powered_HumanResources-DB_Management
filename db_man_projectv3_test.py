@@ -8,9 +8,7 @@ from typing import Optional
 
 
 def connect():
-    """
-    This function will be used to handle connections in other functions.
-    """
+
     try:
         connection=pymysql.connect(host='localhost',
                                user='root',
@@ -37,7 +35,6 @@ def connection_check():
 
     else:
         # If it does not encounter any error, close the connection.
-        cursor.close()
         connection.close()
         return (True, None)
 
@@ -61,13 +58,14 @@ def login(email,password): #id eklendi yeni login fonk
             id=record[0]
             name=record[1]
             surname=record[2]
+            
             if record:
                 role=record[5]
                 # If str returns, then it is either 'Human Resources' or 'Employee'
                 if role=='Human resources':
-                    return "Human resources",id,name,surname
+                    return role,id,name,surname
                 else:
-                    return "Employee",id,name,surname
+                    return role,id,name,surname
             else:
                 # If None returns, then it means that login failed
                 return None
@@ -76,7 +74,7 @@ def login(email,password): #id eklendi yeni login fonk
         return str(e)
     
     finally:
-       cursor.close()
+       
         connection.close()
 """
 if connection:
@@ -134,7 +132,6 @@ def reset_change_password(new_password, entered_code, verification_code, user_em
         except pymysql.MySQLError as e:
             return str(e)
         finally:
-            cursor.close()
             connection.close()
             
     else:
@@ -174,7 +171,6 @@ def load_employee():  #load  id,name,surname of employees
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 
@@ -189,7 +185,6 @@ def not_working(selected_employee:int): #changes employees is_active value 1 to 
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 #load_employee()
@@ -205,7 +200,7 @@ def not_working(selected_employee:int): #changes employees is_active value 1 to 
 
 item_list=[]
 def load_infos(table_name): #^^# Brings all records from specific table 
-
+    print("2")
     connection=connect()
     try:
 
@@ -213,11 +208,11 @@ def load_infos(table_name): #^^# Brings all records from specific table
             query=f"select * from {table_name}"
             cursor.execute(query)
             items=cursor.fetchall()
+            print(items)
             return items
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 # load_infos('items') #sample usage
 
@@ -232,7 +227,6 @@ def  add_item(item_name,quantity):
     except pymysql.MySQLError as e:
         return str (e)
     finally:
-        cursor.close()
         connection.close()
 
 #selected_item format =('1', 'hammer', '37')
@@ -250,7 +244,6 @@ def update_quantity_add(selected_item,add_quantity):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 
@@ -267,7 +260,6 @@ def update_quantity_sub(selected_item,sub_quantity):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 
@@ -286,23 +278,20 @@ def delete_item(item_id): #id yazınca  itemi silen fonksiyon
     except pymysql.MySQLError as e:
         return str (e)
     finally:
-        cursor.close()
         connection.close()
 #delete_item(14)
 
 # assigned_list=[] #^^# QLİSTWİDGET
 
-def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimmetli eşyayı gösteren kod .!tablo view ile oluşturuldu sanal bir görüntü için !! bknz:create view
+def load_item_list_with_name(): # çalışan ismiyle birlikte zimmetli eşyayı gösteren kod .!tablo view ile oluşturuldu sanal bir görüntü için !! bknz:create view
     connection=connect()
     
     try:
         with connection.cursor() as cursor:
-            query="select employee_id,first_name,last_name,item_id,item_name,assignment_date from employee_items_with_names"
+            query="select  assign_id,employee_id, first_name, last_name, item_id, item_name, quantity, assignment_date from employee_items_with_names"
             cursor.execute(query)
             employee_item_list=cursor.fetchall()
-            
-            for emp_item in employee_item_list:
-                assigned_list.append(emp_item)
+            return employee_item_list
 
     except pymysql.MySQLError as e:
         return str(e)
@@ -311,7 +300,7 @@ def load_item_list_with_name(assigned_list): # çalışan ismiyle birlikte zimme
         cursor.close()
         connection.close()
 
-def remain_quantity(item_id): #return integer value which is remain stock by item_id
+def remain_quantity(item_id): #return integer value which is remain stock by item_id. For employee
     connection=connect()
     try:
         with connection.cursor() as cursor:
@@ -323,7 +312,6 @@ def remain_quantity(item_id): #return integer value which is remain stock by ite
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 def assign_item_to_employee_no_checking(id,item_id,quantity): # assign item to employee not checking stock
@@ -342,7 +330,6 @@ def assign_item_to_employee_no_checking(id,item_id,quantity): # assign item to e
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 def assign_item_to_employee(id,item_id,quantity):
@@ -369,7 +356,6 @@ def assign_item_to_employee(id,item_id,quantity):
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 #assign_item_to_employee(3,2,50) # 3 numaralı personelin 2 numaralı itemi 50 adet alması
@@ -377,9 +363,9 @@ def assign_item_to_employee(id,item_id,quantity):
 
 
 # employee_id, first_name, last_name, item_id, item_name, assignment_date
-assigned_list=[
-('1', 'Alvin', 'Fernier', '5', 'Welding Machine', '2010-07-27 11:54:10')
-]
+"""assigned_list=[
+('2', 'Hikmet', 'Catak', '2', 'helmet', '2', '312', '2024-12-17 00:49:19')
+]"""
 
 #örnek liste formatı direkt selected_emp olarakta işlem yapılabilir @FEVZİ
 def remove_item_from_employee(assigned_list):
@@ -415,19 +401,46 @@ def remove_item_from_employee(assigned_list):
     finally:
         cursor.close()
         connection.close()
-
-def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
+def remove_item_from_selected_employee(assign_id):
     connection=connect()
-    selected_emp=assigned_list[1]
-    employee_id=selected_emp[0]
-    query="""select i.item_name,ei.assignment_date from employee_items ei 
+    try:
+        with connection.cursor() as cursor:
+            quantity_query = "select quantity from employee_items where assign_id=%s"
+            cursor.execute(quantity_query, (assign_id,))
+            result = cursor.fetchone()
+            print(result)
+            if result is None:
+                return f"No records found for assignment id: {assign_id}"
+            quantity = result[0]
+            item_id=result[1]
+            
+            
+            # Delete the record
+            query = "delete from employee_items where assign_id=%s"
+            cursor.execute(query, (assign_id,))
+            
+            # Update the quantity in the items table
+            add_query = "update items set quantity=quantity + %s where id=%s"
+            cursor.execute(add_query, (quantity, item_id))
+            
+            connection.commit()
+            
+    except pymysql.MySQLError as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+    
+def get_assigned_items(emp_id): #^^# seçilen kullanıcının id sini alıp sadece zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
+    connection=connect()
+    query="""select ei.assign_id, i.item_name, ei.assignment_date from employee_items ei 
     join items i on ei.item_id=i.id 
     where ei.employee_id=%s
     """
     try:
         with connection.cursor() as cursor:
 
-            cursor.execute(query,(employee_id,))
+            cursor.execute(query,(emp_id,))
             resultss=cursor.fetchall()
             return resultss
     
@@ -437,7 +450,7 @@ def get_assigned_items(assigned_list): #^^# seçilen kullanıcının id sini al�
         cursor.close()
         connection.close()
 
-def show_assigned_items_employee_side(emp_id): #^^# kullanıcıya ait zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
+def show_assigned_items_employee_side(emp_id): #^^# kullanıcıya zimmetli eşyalarını ve teslim edilme tarihlerini  gösteren fonksiyon 
     connection=connect()
     #selected_emp=assigned_list[1]
     query="""select i.item_name,ei.quantity,ei.assignment_date from employee_items ei 
@@ -560,7 +573,25 @@ def see_message(emp_id): # for both side  ##^^##
         cursor.close()
         connection.close()
         
-records=see_message(8) # id si 8 olan kişiye  gelen mesajlar. 
+def see_messagev2(emp_id): # for both side  Provide sending message to sender #^^#
+    
+    """ emp id is taken from login form to see messages which are sent to him. """
+    try:
+        connection=connect()
+        with connection.cursor() as cursor:
+            
+            query="select  m.id,e.first_name,e.last_name,m.subject,m.message_text,m.message_date,m.from_emp_id from messages m join employees e on  m.from_emp_id=e.employee_id where to_emp_id=%s;"
+            cursor.execute(query,(emp_id))
+            messages=cursor.fetchall()
+            
+
+            return messages
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
+        connection.close()
 
 """  output format
 ((10,
@@ -734,17 +765,13 @@ def send_pend_email(records):
 import datetime
 from decimal import Decimal
 def send_email(records,email_title,email_description,from_emp_id,from_name,from_surname,from_role):
+    # Each sublist in records list includes 2 items; first is to_emp_id, second is to_email
     for record in records:
         print(record)
-        to_email = record[9]
+        to_email = record[1]
         print(to_email)
         if not to_email:
             return f"No email found for employee ID: {to_emp_id}"
-        #to_name = record[1]
-        #to_surname = record[2]
-        email_title=email_title
-        email_description=email_description
-        #to_role=record[5]
         to_emp_id=record[0]
         sender_email ='gmail'
         sender_password="pswrd"
@@ -806,29 +833,28 @@ def load_employee_for_message_selection(search_term=""): #  for message interfac
             query="""select employee_id,
             first_name, 
             last_name, 
+            department,
             job_title,
-            department from employees where first_name like %s or  last_name=%s """
+            email from employees where first_name like %s or  last_name=%s """
             cursor.execute(query, (f"%{search_term}%", f"%{search_term}%"))
             employees=cursor.fetchall()
             return employees
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
-def load_employee_for_adjustment():  #  for adjustment interface
+def load_employee_for_salary_adjustment():  #  for adjustment interface
     connection=connect()
     try:
 
         with connection.cursor() as cursor:
-            query="select employee_id, first_name, last_name, job_title,department ,salary from employees"
+            query="select employee_id, first_name, last_name, department, job_title, salary from employees"
             cursor.execute(query)
             employees=cursor.fetchall()
             return employees
     except pymysql.MySQLError as e:
         return str(e)
     finally:
-        cursor.close()
         connection.close()
 
 
@@ -836,7 +862,7 @@ def load_employee_for_adjustment():  #  for adjustment interface
 
 
 
-def create_special_request(employee_id, request_type, request_amount=None, description=None):#Çalışan id'si ile talep oluşturur
+def create_special_request(employee_id, request_type, request_amount=None,):#Çalışan id'si ile talep oluşturur
     
 
     connection = connect()
@@ -845,7 +871,7 @@ def create_special_request(employee_id, request_type, request_amount=None, descr
         with connection.cursor() as cursor:
             sql = """
             INSERT INTO special_requests 
-            (employee_id, request_type, request_amount, request_date, description) 
+            (employee_id, request_type, request_amount, request_date,) 
             VALUES (%s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (
@@ -853,13 +879,11 @@ def create_special_request(employee_id, request_type, request_amount=None, descr
                 request_type, 
                 request_amount, 
                 date.today(), 
-                description
             ))
             connection.commit()
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
-        print(f"Özel talep oluşturulurken hata: {e}")
         return str(e)
     
     finally:
@@ -877,7 +901,7 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
         with connection.cursor() as cursor:
             sql = """
             SELECT * FROM special_requests 
-            WHERE status_of_special_request = 'Pending'
+            WHERE status_of_request = 'Pending'
             """
             cursor.execute(sql)
             return cursor.fetchall()
@@ -887,11 +911,11 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
 
     finally:
         cursor.close()
-        connection.close()
+        connection.close
 
 
 
-def process_special_request(request_id, status_of_request, approved_by):#Yönetici talebi onaylar veya ret eder
+def process_special_request(request_id, status, approved_by):#Yönetici talebi onaylar veya ret eder
     
     connection = connect()
 
@@ -905,7 +929,7 @@ def process_special_request(request_id, status_of_request, approved_by):#Yöneti
                 answer_date = %s
             WHERE request_id = %s
             """
-            cursor.execute(sql, (status_of_request, approved_by, answer_date,request_id))
+            cursor.execute(sql, (status, approved_by, answer_date,request_id))
             connection.commit()
             
     except Exception as e:
@@ -942,7 +966,7 @@ def get_employee_special_requests_history(employee_id):#ID'si verilen çalışan
 
 '''İzin talepleri için'''
 
-def create_leave_request(employee_id, leave_type, start_date, end_date, description):#Çalışan id'si ile izin oluşturur
+def create_leave_request(employee_id, leave_type, start_date, end_date):#Çalışan id'si ile izin oluşturur
 
 
     connection = connect()
@@ -952,12 +976,12 @@ def create_leave_request(employee_id, leave_type, start_date, end_date, descript
         total_days = (datetime.strptime(str(end_date), '%Y-%m-%d').date() - 
                         datetime.strptime(str(start_date), '%Y-%m-%d').date()).days + 1
         
-        
+        created_at = datetime.now()
         
         with connection.cursor() as cursor:
             sql = """
             INSERT INTO employee_leaves 
-            (employee_id, request_date, leave_type, Start_date, end_date, total_dates, description, created_at) 
+            (employee_id, request_date, leave_type, Start_date, end_date, total_dates,created_at) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(sql, (
@@ -967,11 +991,9 @@ def create_leave_request(employee_id, leave_type, start_date, end_date, descript
                 start_date, 
                 end_date, 
                 total_days, 
-                description,
-                datetime.now()
+                created_at
             ))
             connection.commit()
-            del total_days
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
@@ -992,7 +1014,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
         with connection.cursor() as cursor:
             sql = """
             SELECT * FROM employee_leaves 
-            WHERE status_of_leave_asking = 'Pending'
+            WHERE status_of_request = 'Pending'
             """
             cursor.execute(sql)
             return cursor.fetchall()
@@ -1002,7 +1024,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
     
     finally:
         cursor.close()
-        connection.close()
+        connection.close
 
     
 
@@ -1089,52 +1111,9 @@ def calculate_employee_paid_leaves(employee_id):#ID'si verilen çalışanın tü
 
 
 
-def process_request(table_name, request_id_column, request_id_value, status_value, approved_by):
-    "Beyler status sütunu ismi değişecek bu ile status_of_request   !!!!!!!!!!!!!!!!"
-    connection = connect()
-
-    try:
-        with connection.cursor() as cursor:
-            answer_date = date.today()
-            
-            # Dinamik SQL sorgusu (parametre kullanımı)
-            sql = """
-            UPDATE {} 
-            SET status_of_request = %s,
-                approved_by = %s,
-                answer_date = %s
-            WHERE {} = %s
-            """
-            
-            # Parametreleri sırala
-            cursor.execute(sql.format(
-                connection.escape_string(table_name), 
-                connection.escape_string(request_id_column)
-            ), (
-                status_value, 
-                approved_by, 
-                answer_date, 
-                request_id_value
-            ))
-
-            connection.commit()
-            return cursor.rowcount > 0
-    
-    except Exception as e:
-        connection.rollback()
-        print(f"Hata: {e}")
-        return False
-    
-    finally:
-        cursor.close()
-        connection.close()
-
-
 '''İsimleri verilen çalışanın talep geçmişini getirir'''
-
 def search_employee_leaves(first_name: Optional[str] = None, last_name: Optional[str] = None):
     
-
     try:
         connection= connect()
         cursor = connection.cursor(pymysql.cursors.DictCursor)
@@ -1178,11 +1157,8 @@ def search_employee_leaves(first_name: Optional[str] = None, last_name: Optional
             cursor.close()
         if connection:
             connection.close()
-
     
-
 def search_special_requests(first_name: Optional[str] = None, last_name: Optional[str] = None):
-
     try:
         connection= connect()
         cursor = connection.cursor(pymysql.cursors.DictCursor)
@@ -1224,16 +1200,12 @@ def search_special_requests(first_name: Optional[str] = None, last_name: Optiona
             cursor.close()
         if connection:
             connection.close()
-
     
-
 def execute_search(cursor, sql: str, first_name: Optional[str], last_name: Optional[str]):
    
-
     conditions = {}
     params = []
     
-
     if first_name:
         conditions['first_name_condition'] = "AND e.first_name LIKE %s"
         params.append(f"%{first_name}%")
@@ -1245,10 +1217,11 @@ def execute_search(cursor, sql: str, first_name: Optional[str], last_name: Optio
         params.append(f"%{last_name}%")
     else:
         conditions['last_name_condition'] = ""
-
     formatted_sql = sql.format(**conditions)
     cursor.execute(formatted_sql, params)
     return cursor.fetchall()
+
+
 
 
 
@@ -1347,7 +1320,7 @@ def get_monthly_work(work_month):#İstenen günkü tüm çalışan verilerini ge
 
     finally:
         cursor.close()
-        connection.close()
+        connection.close
 
 
 
@@ -1704,24 +1677,63 @@ def save_monthly_analysis(employee_id, year, month):#Aylık verileri günlüğe 
         cursor.close()
         connection.close()
 
+def special_request_status_for_employee(employee_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="select request_type,status_of_request,request_date,answer_date from special_requests where employee_id=%s"
+            cursor.execute(query,(employee_id))
+            records=cursor.fetchall()
+            return records
+    except  Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
 
-"""
-def get_infos_from_selected(selected_person:tuple): 
-    employee_id=selected_person[0]
-    first_name = selected_person[1]
-    last_name = selected_person[2]
-    date_of_birth = selected_person[3]
-    gender = selected_person[4]
-    job_title = selected_person[5]
-    department = selected_person[6]
-    salary = selected_person[7]
-    hire_date = selected_person[8]
-    email = selected_person[9]
-    phone_number = selected_person[10]
-    password = selected_person[11]
-    is_active = selected_person[12]
-    return employee_id,first_name,last_name,date_of_birth,gender,job_title,department,salary,hire_date,email,phone_number,password,is_active
-"""
+def pending_special_requests_for_employee(employee_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="select request_type,status_of_request,request_date,answer_date from special_requests where employee_id=%s and status_of_request=Pending"
+            cursor.execute(query,(employee_id))
+            records=cursor.fetchall()
+            return records
+    except  Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+        
+
+def leave_request_status_for_employee(employee_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="select leave_type,status_of_request,request_date,answer_date from employee_leaves where employee_id=%s"
+            cursor.execute(query,(employee_id))
+            records=cursor.fetchall()
+            return records
+    except  Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+
+def pending_leave_requests_for_employee(employee_id):
+    connection=connect()
+    try:
+        with connection.cursor() as cursor:
+            query="select leave_type,status_of_request,request_date,answer_date from employee_leaves where employee_id=%s and status_of_request=Pending"
+            cursor.execute(query,(employee_id))
+            records=cursor.fetchall()
+            return records
+    except  Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        connection.close()
+         
 
 def update_employee(employee_id, first_name, last_name, date_of_birth, gender, job_title,
                     department, salary, hire_date, email, phone_number, password, is_active):
@@ -1787,3 +1799,22 @@ def generateRandomPassword(length:int) -> str:
     password = ''.join(choice(characters) for i in range(length))
     return password
 
+#no need
+
+"""
+def get_infos_from_selected(selected_person:tuple): 
+    employee_id=selected_person[0]
+    first_name = selected_person[1]
+    last_name = selected_person[2]
+    date_of_birth = selected_person[3]
+    gender = selected_person[4]
+    job_title = selected_person[5]
+    department = selected_person[6]
+    salary = selected_person[7]
+    hire_date = selected_person[8]
+    email = selected_person[9]
+    phone_number = selected_person[10]
+    password = selected_person[11]
+    is_active = selected_person[12]
+    return employee_id,first_name,last_name,date_of_birth,gender,job_title,department,salary,hire_date,email,phone_number,password,is_active
+"""

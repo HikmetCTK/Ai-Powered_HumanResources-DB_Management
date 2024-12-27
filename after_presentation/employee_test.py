@@ -223,7 +223,7 @@ class EmployeeApp(QMainWindow, Ui_EmployeeWindow):
     def handleCellClick(self, row, column):        
         for item in self.created_right_menu_dynamic_widgets:
             try:
-                self.verticalLayout_17.removeWidget(item)
+                self.expandTableVerticalLayout.removeWidget(item)
                 item.disconnect()
                 item.close()
                 item.deleteLater()

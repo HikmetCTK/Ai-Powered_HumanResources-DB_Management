@@ -823,7 +823,7 @@ def _createControls(obj, pairs:dict, buttons:list|None = None, buttonColumnCount
 
         # New objects must always be placed between two vertical spacers.
         # The bottom spacer must always remain at the bottom.
-        obj.verticalLayout_17.insertWidget(obj.verticalLayout_17.count() - 1, custom_widget)
+        obj.expandTableVerticalLayout.insertWidget(obj.expandTableVerticalLayout.count() - 1, custom_widget)
 
         obj.created_right_menu_dynamic_widgets.append(custom_widget)
     

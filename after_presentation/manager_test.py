@@ -50,6 +50,7 @@ class ManagerApp(QMainWindow, Ui_ManagerWindow):
 
         # For showing the role in the short menu we have to make some adjustments
         shortenedRole = self.role
+        # If the role is longer than 10 characters, it must be shortened
         if len(self.role) > 10:
             shortenedRole = ""
             splittedRole = self.role.split(" ")
@@ -240,11 +241,11 @@ class ManagerApp(QMainWindow, Ui_ManagerWindow):
     
     def handleCellClick(self, row, column):
         if self.stackedWidget_side_menu.currentWidget().objectName() == "page_money_transactions" and self.stackedWidget_side_menu.isVisible():
-            return # We do not want this screen to change because it is needed
+            return # We do not want this screen to be changed because it is needed
         
         for item in self.created_right_menu_dynamic_widgets:
             try:
-                self.verticalLayout_17.removeWidget(item)
+                self.expandTableVerticalLayout.removeWidget(item)
                 item.disconnect()
                 item.close()
                 item.deleteLater()

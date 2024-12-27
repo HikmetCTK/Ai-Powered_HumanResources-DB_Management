@@ -85,8 +85,6 @@ class ManagerApp(QMainWindow, Ui_ManagerWindow):
             except Exception as e:
                 StandardMessageBox.Error(self, "Error (handler)", f"An error occurred during the latest process! | {str(e)}").exec()
             
-            # Delete unnecessary local variables
-            del stack, callerName
         return innerWrapper
     
     def errorCatcher(func:callable):
@@ -348,9 +346,6 @@ class ManagerApp(QMainWindow, Ui_ManagerWindow):
                 self.LoadAssignedItemsToEmployee(emp_id = id, name = outputList[2], surname = outputList[3])
             else:
                 pass
-        
-        # Delete unnecessary local variables
-        del outputList, dynamicLineEdits, senderButtonType, id
             
     def showPeopleCardMenu(self):
         CommonFeatures.showPeopleCardMenu(self)
@@ -393,9 +388,6 @@ class ManagerApp(QMainWindow, Ui_ManagerWindow):
             # Rearrange the texts on the buttons
             self.btn_hints_select_all.setText("Accept All")
             self.btn_hints_clear_all.setText("Reject All")
-
-        # Delete unnecessary local variable        
-        del hintText
 
     @errorCatcher
     def HandleTablePageController(self):

@@ -1,16 +1,16 @@
 
 ![200](https://github.com/user-attachments/assets/bf8d6a6e-e26a-409d-b140-438fe54a14c2)
 
-| Manager Side |
-| :---: |
-| Hiring |
-| Dismissal |
-| Item Assignment Registration |
-| Salary Adjustment |
-| Search |
-| Group Message System |
-| Direct Message System |
-| Group Mail System |
+| Manager Side | Employee Side |
+| :---: | :---: |
+| Hiring | View Pernal Information |
+| Dismissal | View Events |
+| Item Assignment Registration | Make Special Requests
+| Salary Adjustment | View Assigned Items |
+| Search | Get and Send Direct Messages |
+| Group Message System | Get and Send Group Messages |
+| Direct Message System | Get Group Emails |
+| Group Email System | See Past Requests |
 | View Employees' Information |
 | Event Planning |
 | Request Evaluation System |

@@ -35,7 +35,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 - Organizational Chart
 - Viewing Statistics
 
-# About the Developers
+# Developers and Their Responsibilities in the Project
 - Fevzi FİDAN
   - UI Development
   - [GitHub](https://github.com/fevzifidan)
@@ -44,6 +44,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
   - [GitHub](https://github.com/HikmetCTK)
 - Ömer Faruk AZİLİ
   - ...
+  - [GitHub](https://github.com/OmfAzl)
 
 
 ![68747470733a2f2f63646e2e6472696262626c652e636f6d2f75736572732f3733303730332f73637265656e73686f74732f363538313234332f6176656e746f2e676966](https://github.com/user-attachments/assets/60c0a490-ee2a-4e2c-891d-2170b0ba08f3)

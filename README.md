@@ -1,7 +1,7 @@
 
 ![200](https://github.com/user-attachments/assets/bf8d6a6e-e26a-409d-b140-438fe54a14c2)
 
-**# Features**
+# Features
 
 | Manager Side | Employee Side |
 | :---: | :---: |

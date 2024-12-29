@@ -25,6 +25,11 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | Event Planning |
 | Request Evaluation System |
 
+# Future Updates and Improvements
+- Chatbot
+- Organizational Chart
+- Viewing Statistics
+
 Manager Side:
 
 Chatbot 

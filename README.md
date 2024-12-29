@@ -4,7 +4,7 @@
 # About the Project
 This project is a Windows application that brings to life the theoretical knowledge learned in the Database Systems course. It is a simple _Human Resources Management System_ adaptation designed to be used between managers and employees.
 
-# Language and Tools Used
+# Programming Language and Tools Used
 The project has been developed in _Python_ language, _MySQL_ database was used, and _PyQt6_ GUI toolkit was used for the interface.
 
 # Features
@@ -24,6 +24,9 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | View Employees' Information |
 | Event Planning |
 | Request Evaluation System |
+
+# Supported Languages
+- English
 
 # App Screenshots
 

@@ -1,6 +1,19 @@
 
 ![200](https://github.com/user-attachments/assets/bf8d6a6e-e26a-409d-b140-438fe54a14c2)
 
+| Manager Side |
+| :---: |
+| Hiring |
+| Dismissal |
+| Item Assignment Registration |
+| Salary Adjustment |
+| Search |
+| Group Message System |
+| Direct Message System |
+| Group Mail System |
+| View Employees' Information |
+| Event Planning |
+| Request Evaluation System |
 
 Manager Side:
 

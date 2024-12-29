@@ -3,7 +3,7 @@
 
 | Manager Side | Employee Side |
 | :---: | :---: |
-| Hiring | View Pernal Information |
+| Hiring | View Personal Information |
 | Dismissal | View Events |
 | Item Assignment Registration | Make Special Requests
 | Salary Adjustment | View Assigned Items |

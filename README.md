@@ -8,7 +8,7 @@ This project is a Windows application that brings to life the theoretical knowle
 The project has been developed in _Python_ language, _MySQL_ database was used, and _PyQt6_ GUI toolkit was used for the interface.
 
 # Features
-### Below are the available features for manager and employee roles:
+#### Below are the available features for manager and employee roles:
 
 | Manager Side | Employee Side |
 | :---: | :---: |

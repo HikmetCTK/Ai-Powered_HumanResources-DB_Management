@@ -32,6 +32,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 |  |  |  |
 | :--: | :--: | :--: |
 | ![Login Image](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/login_page.png) | ![Reset Password Step 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/reset_password_step_1.png) | ![Reset Password Step 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/reset_password_step_2.png)
+| ![Dashboard](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/dashboard.png) | ![Hiring](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/hiring.png) | ![Fire](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/fire.png) |
 
 # Future Updates and Improvements
 - Chatbot

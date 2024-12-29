@@ -6,11 +6,12 @@
 | Hiring | View Personal Information |
 | Dismissal | View Events |
 | Item Assignment Registration | Make Special Requests
-| Salary Adjustment | See Past Requests |
-| Search | Get and Send Direct Messages |
-| Group Message System | Get and Send Group Messages |
-| Direct Message System | Get Group Emails |
-| Group Email System | View Assigned Items |
+| View Assigned Items to Employees | See Past Requests |
+| Salary Adjustment | Get and Send Direct Messages |
+| Search | Get and Send Group Messages |
+| Group Message System | Get Group Emails |
+| Direct Message System | View Assigned Items |
+| Group Email System |
 | View Employees' Information |
 | Event Planning |
 | Request Evaluation System |

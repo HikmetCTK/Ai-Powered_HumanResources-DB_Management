@@ -34,6 +34,8 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | ![Login Image](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/login_page.png) | ![Reset Password Step 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/reset_password_step_1.png) | ![Reset Password Step 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/reset_password_step_2.png)
 | ![Dashboard](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/dashboard.png) | ![Hiring](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/hiring.png) | ![Fire](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/fire.png) |
 | ![View Message](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/mesaj%20g%C3%B6sterme.png) | ![Send Direct Message](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/mesaj%20isim%20listeleme.png) | ![Send Group Message](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/group%20message.png) |
+| ![Quick Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/liste%20quick%20action.png) | ![View Employees](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/list%20employe.png) | ![Employee Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/i%C5%9Flem%20sayfas%C4%B1.png) |
+| ![Search Bar Filter](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/search.png) |
 
 # Future Updates and Improvements
 - Chatbot

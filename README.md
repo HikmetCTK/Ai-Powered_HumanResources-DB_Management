@@ -28,7 +28,10 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 # Supported Languages
 - English
 
-# App Screenshots
+# Sample App Screenshots
+|  |  |  |
+| :--: | :--: | :--: |
+| ![Login Image]() | ![Reset Password Step 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/reset_password_step_1.png) | ![Reset Password Step 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/resimler/reset_password_step_2.png)
 
 # Future Updates and Improvements
 - Chatbot

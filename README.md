@@ -44,7 +44,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
   - UI Development
   - [GitHub](https://github.com/fevzifidan)
 - Hikmet ÇATAK
-  - ...
+  - Designing Database and writing Python functions(Except Requests  and Salary Part)
   - [GitHub](https://github.com/HikmetCTK)
 - Ömer Faruk AZİLİ
   - ...

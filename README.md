@@ -7,7 +7,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 # Features
 #### Below are the available features for **Manager** and **Employee** roles:
 
-| Manager Side | Employee Side |
+| $${\color{red}Manager Side}$$ | Employee Side |
 | :---: | :---: |
 | Hiring | View Personal Information |
 | Dismissal | View Events |

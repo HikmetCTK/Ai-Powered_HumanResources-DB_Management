@@ -1,6 +1,3 @@
-
-![200](https://github.com/user-attachments/assets/bf8d6a6e-e26a-409d-b140-438fe54a14c2)
-
 # About the Project
 This project is a Windows application that brings to life the theoretical knowledge learned in the Database Systems course. It is a simple _Human Resources Management System_ adaptation designed to be used between managers and employees.
 

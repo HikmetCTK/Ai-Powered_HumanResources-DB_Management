@@ -11,9 +11,9 @@ def connect():
 
     try:
         connection=pymysql.connect(host='localhost',
-                               user='root',
-                               password="sql5858",
-                               database='human_resources')
+                               user='user',
+                               password="password",
+                               database='database_name')
         return connection
     except pymysql.MySQLError as e:
         return str(e)
@@ -25,9 +25,9 @@ def connection_check():
     """
     try:
         connection=pymysql.connect(host='localhost',
-                               user='root',
-                               password="sql5858",
-                               database='human_resources')
+                               user='user',
+                               password="password",
+                               database='database_name')
         
     except pymysql.MySQLError as e:
         # If an error occurs trying to create a connection, there is no need in trying to close it.
@@ -91,8 +91,8 @@ else:
 def send_verification_code(user_email):
     verification_code = random.randint(100000, 999999)
     
-    sender_email ='catakhikmet9@gmail.com'  #this e-mail should provide app password on google
-    sender_password = "fivi lzxy miea nodk" # app password fivi lzxy miea nodk
+    sender_email ='gmail'  #this e-mail should provide app password on google
+    sender_password = "app password" # app password 
     try:
 
         with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
@@ -758,8 +758,8 @@ def send_pend_email(records):
                         role=record[12]
                         to_emp_id=record[4]
                         pend_id=record[0]
-                        sender_email ='catakhikmet9@gmail.com'
-                        sender_password = "fivi lzxy miea nodk"            
+                        sender_email ='gmail'
+                        sender_password = "app passowrd"            
                         msg = MIMEMultipart()
                         msg['From'] =sender_email
                         to_email= get_email(to_emp_id)
@@ -804,8 +804,8 @@ def send_email(records,email_title,email_description,from_emp_id,from_name,from_
         if not to_email:
             return f"No email found for employee ID: {to_emp_id}"
         to_emp_id=record[0]
-        sender_email ='catakhikmet9@gmail.com'
-        sender_password="fivi lzxy miea nodk"
+        sender_email ='gmail'
+        sender_password="app password"
         # Create email
         msg = MIMEMultipart()
         msg['From'] = sender_email

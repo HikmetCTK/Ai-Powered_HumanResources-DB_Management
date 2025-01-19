@@ -82,8 +82,11 @@ Yanıtın Json formatında olmalı:
         json_response=json.loads(response.text)  # taking and processing output
         sorgu=json_response["Sorgu"]
         kararlilik=json_response["Kararlılık"]
-        print("eski sorgu: ",sorgu)
-        return sorgu,kararlilik
+        #print("eski sorgu: ",sorgu)
+        if kararlilik>0.7:
+          return sorgu
+        else:
+          return False
     except Exception as e:
         return str(e)
     
@@ -114,7 +117,7 @@ def check_sql_query(sql_query:str)->str:
         json_response=json.loads(response.text)
         #sorgu=json_response["sorgu"]
         duzeltilmis_sorgu=json_response["düzeltilmiş_sorgu"]
-        print("yeni sorgu: ",duzeltilmis_sorgu)
+        #print("yeni sorgu: ",duzeltilmis_sorgu)
         return duzeltilmis_sorgu
     except Exception as e:
         return str(e)
@@ -135,3 +138,18 @@ def run_in_sql(sorgu:str):
         return run_in_sql(fixed_query)
     finally:
         connection.close()
+def chatbot_main():
+    while True:
+        user_query=input("Sorgunuzu giriniz:")
+        if user_query.lower()=="e":
+
+            break
+    
+    
+
+        else:
+            sorgu=convert_to_sql(user_query)
+            if sorgu:
+                print(run_in_sql(sorgu))
+            else:
+                print( "Bu sorgu sql sorgusuna çevrilemez")

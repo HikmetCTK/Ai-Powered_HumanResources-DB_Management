@@ -1,7 +1,7 @@
+import pymysql
 import json
 import google.generativeai as genai
-genai.configure(api_key="api_key")  # api_key is required for using generativeai library
-import pymysql
+genai.configure(api_key="gemini api key")
 def connect():
 
     try:
@@ -12,11 +12,14 @@ def connect():
         return connection
     except pymysql.MySQLError as e:
         return str(e)
+
+
+
 def convert_to_sql(user_query:str)->str:
     """
     This function  will convert user queries to sql queries and process json format output.
     """
-    prompt="""Kullanıcıdan gelen isteği Sql formatına uygun sorguya dönüştür. Sorguların tablo isimleri ve sütun isimleri altta belirtilen tablo ve sütun isimleri olmalıdır.
+    prompt="""Kullanıcıdan gelen isteği Sql formatına uygun sorguya dönüştür. Sorguların tablo isimleri ve sütun isimleri altta belirtilen tablo ve sütun isimleri olmalıdır. Eğer alakasız bir şey yazıyorsa kararlılık 0 olmalıdır.
 
 Aşağıda tablo ve  her bir tablodaki sütun isimleri verilmiştir:
 
@@ -49,25 +52,25 @@ Sütunlar: request_id, employee_id, request_type('Advance','Salary Increase','Pa
 
 *Örnek Senaryo:*
  {
-      "istek": "en çok maaş alan eleman kimdir.",
-      "Sorgu": "SELECT first_name, last_name, salary FROM employees ORDER BY salary DESC LIMIT 1",
-      "Kararlılık":0.94
+      "query": "en çok maaş alan eleman kimdir.",
+      "sql_query": "SELECT first_name, last_name, salary FROM employees ORDER BY salary DESC LIMIT 1",
+      "confidence":0.94
     },
     {
-      "istek": "It departmanında olan çalışanları getir.",
-      "Sorgu": "SELECT * FROM employees WHERE department = 'IT'",
-      "Kararlılık":0.97
+      "query": "It departmanında olan çalışanları getir.",
+      "sql_query": "SELECT * FROM employees WHERE department = 'IT'",
+      "confidence":0.97
     },
     {
-      "istek": "Çalışanlara atanan toplam eşyayı söyle.",
-      "Sorgu": "SELECT employee_id, SUM(quantity) as total_items FROM employee_items GROUP BY employee_id",
-      "Kararlılık":1.0}
+      "query": "Çalışanlara atanan toplam eşyayı söyle.",
+      "sql_query": "SELECT employee_id, SUM(quantity) as total_items FROM employee_items GROUP BY employee_id",
+      "confidence":1.0}
 
 Yanıtın Json formatında olmalı:
 **Json formatı**
-{"istek:str,
-"Sorgu":str,
-"Kararlılık":int}
+{"query:str,
+"sql_query":str,
+"confidence":int}
 
  """
     generation_config={
@@ -80,16 +83,28 @@ Yanıtın Json formatında olmalı:
     response=model.generate_content(user_query)
     try:
         json_response=json.loads(response.text)  # taking and processing output
-        sorgu=json_response["Sorgu"]
-        kararlilik=json_response["Kararlılık"]
-        #print("eski sorgu: ",sorgu)
-        if kararlilik>0.7:
-          return sorgu
+        sql_query=json_response["sql_query"]
+        print(sql_query)
+        confidence=json_response["confidence"]
+        if confidence>0.7:
+          return sql_query
         else:
           return False
     except Exception as e:
         return str(e)
+
     
+def check_is_sql_query(sql_query:str)->str:
+    """
+    This function will check if the query is a valid sql query.
+    """
+    if sql_query.split()[0].upper() in ["SELECT"]:
+        return True
+    else:
+        return False
+sql_query="SELECT first_name, last_name, salary FROM employees ORDER BY salary DESC LIMIT 1"
+a=sql_query.split()[0].upper()
+
 def check_sql_query(sql_query:str)->str:
     """
     This function will check the sql query and if it is  wrong,it will return fixed query.
@@ -102,8 +117,8 @@ def check_sql_query(sql_query:str)->str:
       "düzeltilmiş_sorgu":"SELECT first_name, last_name FROM employees ORDER BY salary DESC LIMIT 1"
     }
     Json formatı:
-    {"sorgu":str,
-    "düzeltilmiş_sorgu":str}
+    {"query":str,
+    "fixed_query":str}
     """
     generation_config={
     "temperature":0.1,
@@ -116,13 +131,14 @@ def check_sql_query(sql_query:str)->str:
     try:
         json_response=json.loads(response.text)
         #sorgu=json_response["sorgu"]
-        duzeltilmis_sorgu=json_response["düzeltilmiş_sorgu"]
-        #print("yeni sorgu: ",duzeltilmis_sorgu)
-        return duzeltilmis_sorgu
+        fixed_query=json_response["fixed_query"]
+        print(fixed_query)
+        return fixed_query
     except Exception as e:
         return str(e)
-        
-def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=4)->str:
+
+
+def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str:
     """
     This function will run sql queries which is taken from chatbot in database and return the output.
     """
@@ -143,7 +159,6 @@ def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=4)->str:
         
     finally:
         connection.close()
-        
 
 def chatbot_main():
     while True:
@@ -158,3 +173,4 @@ def chatbot_main():
             else:
                 print("Bu istek SQL  sorgusuna çevrilemiyor.")
 
+chatbot_main()

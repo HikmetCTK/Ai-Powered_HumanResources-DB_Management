@@ -34,6 +34,9 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | ![Quick Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/liste%20quick%20action.png) | ![View Employees](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/list%20employe.png) | ![Employee Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/i%C5%9Flem%20sayfas%C4%B1.png) |
 | ![Search Bar Filter](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/search.png) | ![Special Request Evaluation 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval.png) | ![Special Request Evaluation 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval_2.png)
 
+Ai Agent Workflow
+![Screenshot 2025-01-19 232140](https://github.com/user-attachments/assets/62245dba-696b-4642-94e9-c86b4db92fc0)
+
 # Future Updates and Improvements
 - Chatbot
 - Organizational Chart

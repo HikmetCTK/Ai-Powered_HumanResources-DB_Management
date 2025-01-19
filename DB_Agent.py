@@ -93,17 +93,6 @@ Yanıtın Json formatında olmalı:
     except Exception as e:
         return str(e)
 
-    
-def check_is_sql_query(sql_query:str)->str:
-    """
-    This function will check if the query is a valid sql query.
-    """
-    if sql_query.split()[0].upper() in ["SELECT"]:
-        return True
-    else:
-        return False
-sql_query="SELECT first_name, last_name, salary FROM employees ORDER BY salary DESC LIMIT 1"
-a=sql_query.split()[0].upper()
 
 def check_sql_query(sql_query:str)->str:
     """

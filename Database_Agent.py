@@ -121,7 +121,8 @@ def check_sql_query(sql_query:str)->str:
         return duzeltilmis_sorgu
     except Exception as e:
         return str(e)
-def run_in_sql(sorgu:str):
+        
+def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=4)->str:
     """
     This function will run sql queries which is taken from chatbot in database and return the output.
     """
@@ -132,24 +133,28 @@ def run_in_sql(sorgu:str):
         cursor.execute(sorgu)
         result=cursor.fetchall()
         return result
-    except pymysql.MySQLError as e:
-        fixed_query=check_sql_query(sorgu)
+    except pymysql.MySQLError as e:   
+        if deneme<maksimum_deneme:
+            fixed_query=check_sql_query(sorgu)
+            deneme+=1
+            return (run_in_sql(fixed_query,deneme,maksimum_deneme))
+        else:
+            return print("maksimum  deneme sayısına ulaşıldı,hata düzeltilemedi.Daha farklı bir sorgu deneyin")
         
-        return run_in_sql(fixed_query)
     finally:
         connection.close()
+        
+
 def chatbot_main():
     while True:
-        user_query=input("Sorgunuzu giriniz:")
-        if user_query.lower()=="e":
-
+        user_query = input("Sorgunuzu giriniz:")
+        if user_query.lower() == "e":
             break
-    
-    
-
         else:
-            sorgu=convert_to_sql(user_query)
+            sorgu = convert_to_sql(user_query)
             if sorgu:
-                print(run_in_sql(sorgu))
+                response=run_in_sql(sorgu)
+                print(response)
             else:
-                print( "Bu sorgu sql sorgusuna çevrilemez")
+                print("Bu istek SQL  sorgusuna çevrilemiyor.")
+

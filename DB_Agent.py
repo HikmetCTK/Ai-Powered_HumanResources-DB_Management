@@ -118,7 +118,7 @@ def fix_sql_query(sql_query:str,error_reason:str)->str:
     model=genai.GenerativeModel(model_name="gemini-1.5-flash",generation_config=generation_config,
                                 system_instruction=prompt)
     response=model.generate_content(sql_query)
-    print(prompt)
+    
     try:
         json_response=json.loads(response.text)
         #sorgu=json_response["sorgu"]

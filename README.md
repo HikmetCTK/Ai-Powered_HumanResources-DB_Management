@@ -35,7 +35,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | ![Search Bar Filter](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/search.png) | ![Special Request Evaluation 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval.png) | ![Special Request Evaluation 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval_2.png)
 
 Ai Agent Workflow
-![Screenshot 2025-01-19 232140](https://github.com/user-attachments/assets/62245dba-696b-4642-94e9-c86b4db92fc0)
+![Ai Agents Workflow](https://github.com/user-attachments/assets/9d76a7e7-2506-45a0-bd40-a22356a6931f)
 
 # Future Updates and Improvements
 - Chatbot

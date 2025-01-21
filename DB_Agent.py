@@ -94,16 +94,17 @@ Yanıtın Json formatında olmalı:
         return str(e)
 
 
-def check_sql_query(sql_query:str)->str:
+def fix_sql_query(sql_query:str,error_reason:str)->str:
     """
     This function will check the sql query and if it is  wrong,it will return fixed query.
     """
     prompt="""Sen gelen  sql sorgusundaki hatayı  kontrol et ve Yanlış kısmı düzelt.
+    hata: {error_reason}
     Cevabın json formatında olmalıdır.
     Örnek senaryo:
     {
-      "sorgu": "SELECT first_name, last_name, MAX(salary) FROM employees",
-      "düzeltilmiş_sorgu":"SELECT first_name, last_name FROM employees ORDER BY salary DESC LIMIT 1"
+      "query": "SELECT first_name, last_name, MAX(salary) FROM employees",
+      "fixed_query":"SELECT first_name, last_name FROM employees ORDER BY salary DESC LIMIT 1"
     }
     Json formatı:
     {"query":str,
@@ -127,7 +128,7 @@ def check_sql_query(sql_query:str)->str:
         return str(e)
 
 
-def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str:
+def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str: 
     """
     This function will run sql queries which is taken from chatbot in database and return the output.
     """
@@ -139,8 +140,8 @@ def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str:
         result=cursor.fetchall()
         return result
     except pymysql.MySQLError as e:   
-        if deneme<maksimum_deneme:
-            fixed_query=check_sql_query(sorgu)
+        if deneme<maksimum_deneme:   # prevent infinite excel loop 
+            fixed_query=fix_sql_query(sorgu,str(e))
             deneme+=1
             return (run_in_sql(fixed_query,deneme,maksimum_deneme))
         else:

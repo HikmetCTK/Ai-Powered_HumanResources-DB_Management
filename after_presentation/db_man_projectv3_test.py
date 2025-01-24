@@ -797,13 +797,16 @@ import datetime
 from decimal import Decimal
 def send_email(records,email_title,email_description,from_emp_id,from_name,from_surname,from_role):
     # Each sublist in records list includes 2 items; first is to_emp_id, second is to_email
+    # If email is sent during hiring for notify the employee about their initial password
+    # then there to_emp_id is set to None and do not save the record of the email
+    # into the database.
     for record in records:
-
+        to_emp_id=record[0]
         to_email = record[1]
 
         if not to_email:
-            return f"No email found for employee ID: {to_emp_id}"
-        to_emp_id=record[0]
+            return f"No email found! Given {to_email}"
+        
         sender_email ='gmail'
         sender_password="app password"
         # Create email
@@ -820,8 +823,12 @@ def send_email(records,email_title,email_description,from_emp_id,from_name,from_
                 smtp.starttls()
                 smtp.login(sender_email,sender_password)
                 smtp.sendmail(sender_email, to_email, msg.as_string())
-            
-            # Update database on success
+                
+        except Exception as e:
+            return f"Error sending email: {e}"
+
+        if to_emp_id:
+            # Update database
             try:
                 connection = connect()
                 with connection.cursor() as cursor:
@@ -831,8 +838,6 @@ def send_email(records,email_title,email_description,from_emp_id,from_name,from_
                 return "Email sent and status updated in database."
             except Exception as e:
                 return f"Error updating database: {e}"
-        except Exception as e:
-            return f"Error sending email: {e}"
 
 """datas=[(1,
   'Alvin',

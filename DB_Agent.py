@@ -84,7 +84,7 @@ Yanıtın Json formatında olmalı:
     try:
         json_response=json.loads(response.text)  # taking and processing output
         sql_query=json_response["sql_query"]
-        print(sql_query)
+        #print(sql_query)
         confidence=json_response["confidence"]
         if confidence>0.7:
           return sql_query
@@ -123,7 +123,7 @@ def fix_sql_query(sql_query:str,error_reason:str)->str:
         json_response=json.loads(response.text)
         #sorgu=json_response["sorgu"]
         fixed_query=json_response["fixed_query"]
-        print(fixed_query)
+        #print(fixed_query)
         return fixed_query
     except Exception as e:
         return str(e)
@@ -141,7 +141,7 @@ def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str:
     try:
         for operation in dangerous_operations:
             if operation in sorgu.lower():
-                return print("Bu sorguyu çalıştıramazsınız.")
+                return "Bu sorguyu çalıştıramazsınız."
             else:
                 
                 cursor.execute(sorgu)
@@ -154,7 +154,7 @@ def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str:
             deneme+=1
             return (run_in_sql(fixed_query,deneme,maksimum_deneme))
         else:
-            return print("maksimum  deneme sayısına ulaşıldı,hata düzeltilemedi.Daha farklı bir sorgu deneyin")
+            return "maksimum  deneme sayısına ulaşıldı,hata düzeltilemedi.Daha farklı bir sorgu deneyin"
         
     finally:
         connection.close()

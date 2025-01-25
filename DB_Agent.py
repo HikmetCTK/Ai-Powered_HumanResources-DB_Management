@@ -159,17 +159,16 @@ def run_in_sql(sorgu:str,deneme=0,maksimum_deneme=3)->str:
     finally:
         connection.close()
 
-def chatbot_main():
-    while True:
-        user_query = input("Sorgunuzu giriniz:")
-        if user_query.lower() == "e":
-            break
+def ask_chatbot(user_query:str) -> str:
+    try:
+        query = convert_to_sql(user_query)
+        if query:
+            response = run_in_sql(query)
+            return response
         else:
-            sorgu = convert_to_sql(user_query)
-            if sorgu:
-                response=run_in_sql(sorgu)
-                print(response)
-            else:
-                print("Bu istek SQL  sorgusuna çevrilemiyor.")
-
-chatbot_main()
+            return "Your query could not converted to a proper SQL query. Please try something else..."
+    except Exception as e:
+        response = "Something went wrong and we encountered an error. Error related information:\n"\
+                f"{e}\n"\
+                "You can try something else or you can contact the developers."
+        return response

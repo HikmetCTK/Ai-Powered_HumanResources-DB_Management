@@ -3,6 +3,7 @@ import json
 import google.generativeai as genai
 genai.configure(api_key="gemini api key")
 def connect():
+    # Connection function
 
     try:
         connection=pymysql.connect(host='localhost',

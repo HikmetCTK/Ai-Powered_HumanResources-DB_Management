@@ -11,9 +11,9 @@ def connect():
 
     try:
         connection=pymysql.connect(host='localhost',
-                               user='root',
-                               password="sql5858",
-                               database='human_resources',port=3306)
+                               user='user',
+                               password="password",
+                               database='human_resources')
         return connection
     except pymysql.MySQLError as e:
         raise e

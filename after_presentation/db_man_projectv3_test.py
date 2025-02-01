@@ -54,23 +54,21 @@ def login(email,password): #id eklendi yeni login fonk
             query="select * from employees where email=%s and password=%s"
             cursor.execute(query,(email,password))
             record=cursor.fetchone()
-            print(record)
-            id=record[0]
-            name=record[1]
-            surname=record[2]
             
             if record:
+                id=record[0]
+                name=record[1]
+                surname=record[2]
                 role=record[5]
-                # If str returns, then it is either 'Human Resources' or 'Employee'
-                if role=='Human resources':
-                    return role,id,name,surname
-                else:
-                    return role,id,name,surname
+
+                # Role is either "Human resources' or 'Employee'
+                return role,id,name,surname
+                
             else:
                 # If None returns, then it means that login failed
                 return None
     except Exception as e:
-        # If the returning str is neither 'Human Resources' nor 'Employee', that means that an error has occurred!
+        # If the returning str is neither 'Human resources' nor 'Employee', that means that an error has occurred!
         return str(e)
     
     finally:

@@ -1054,7 +1054,6 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
             cursor.execute(sql)
             return cursor.fetchall()
     except Exception as e:
-        print(f"Bekleyen talepler getirilirken hata: {e}")
         return str(e)
     
     finally:

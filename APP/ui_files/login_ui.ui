@@ -1,0 +1,2764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>550</width>
+    <height>496</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>550</width>
+    <height>496</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMenuBar {
+	background-color:#555555;
+	color:#FFFFFF
+}
+
+QMenuBar:item::selected {
+	background-color: #be8af9;
+}
+
+QMenu {
+	background-color:#555555;
+}
+
+QMenu::item {
+	background-color: #555555;
+	color: #FFFFFF;
+}
+
+QMenu::item::hover {
+	background-color: #be8af9;
+}
+
+QMenu::item:selected {
+	background-color: #be8af9;
+}
+
+QMenu::separator {
+background-color:#242424;
+height:1px;
+margin:0px;
+}
+
+QMenu[objectName=&quot;menuForm&quot;]::separator {
+background-color:#000000;
+height:1px;
+margin:5px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#191919;</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <widget class="QWidget" name="widget_sub_bar" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>421</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel[objectName=&quot;lbl_connection_status&quot;]{
+	color:#f0f0f0;
+	font-size:10px;
+}
+
+QLabel[objectName=&quot;lbl_contact_msg&quot;]{
+	color:#f0f0f0;
+	font-size:10px;
+}
+
+QPushButton[objectName=&quot;btn_contact_back&quot;]{
+	background-color:None;
+	border:None;
+	color:#be8af9;
+	font-size:10px;
+}</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="lbl_connection_icon">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Status of database connection</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap resource="../icons_source.qrc">:/newSource/icons/red_dot.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbl_connection_status">
+         <property name="minimumSize">
+          <size>
+           <width>160</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>160</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Status of database connection</string>
+         </property>
+         <property name="text">
+          <string>Not Connected (ERR) - 05:36:35</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>289</width>
+           <height>19</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="lbl_contact_msg">
+         <property name="minimumSize">
+          <size>
+           <width>176</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>For contact and developer information</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_contact_back">
+         <property name="minimumSize">
+          <size>
+           <width>54</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>-1</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="toolTip">
+          <string>Click to reset your password</string>
+         </property>
+         <property name="text">
+          <string>Click here!</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>20</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="font">
+       <font>
+        <family>MS Shell Dlg 2</family>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	color:#f0f0f0;
+	font-size:18px;
+}
+
+QLabel[objectName=&quot;lbl_header_message&quot;] {
+	color:#f0f0f0;
+	font-size:12px;
+}</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page_login">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QWidget" name="widget_header_page_login" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>459</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel[objectName=&quot;lbl_welcome&quot;] {
+	color:#f0f0f0;
+	background-color:#191919;
+	font-size:18px;
+	font-weight:bold;
+}
+
+QLabel[objectName=&quot;lbl_welcome_msg&quot;] {
+	color:#f0f0f0;
+	background-color:#191919;
+	font-size:12px;
+}
+
+QWidget {
+	background-color:#191919;
+}</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLabel" name="lbl_welcome">
+             <property name="text">
+              <string>Welcome Back!</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_welcome_msg">
+             <property name="text">
+              <string>Log into your account in order to proceed</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QWidget" name="widget_page_login_container" native="true">
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+	background-color:#242424;
+	border:1px solid #242424;
+	border-radius:10px;
+}
+
+QLabel {
+	color:#f0f0f0;
+	font-size:18px;
+}
+
+QLabel[objectName=&quot;lbl_forgot_password&quot;]{
+	font-size:12px;
+}
+
+QLabel[objectName=&quot;lbl_mail_address_login_page&quot;]{
+	font-size:11px;
+}
+
+QLabel[objectName=&quot;lbl_password_login_page&quot;]{
+	font-size:11px;
+}
+
+QLineEdit {
+	border:2px solid #555555;
+	border-radius:10px;
+	background-color:#555555;
+	color:#f0f0f0;
+	padding-left:8px;
+}
+
+QLineEdit::focus{
+	border:1px solid #be8af9;
+	border-radius:10px;
+	background-color:#555555;
+	background
+}
+
+QPushButton {
+	background-color:#be8af9;
+	color:#1b0038;
+	border:2px solid #be8af9;
+	border-radius:10px;
+}
+
+QPushButton::hover {
+	background-color:#f0f0f0;
+	color:#000000;
+	border:2px solid #f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton::pressed {
+	background-color:#808080;
+	color:#000000;
+	border:2px solid #808080;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_forgot_password&quot;]{
+	background-color:#242424;
+	border:None;
+	color:#be8af9;
+}
+
+QCheckBox {
+	color:#f0f0f0;
+}</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>41</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_page_login_header" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>441</width>
+               <height>61</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>61</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>129</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="lbl_login_icon">
+                <property name="minimumSize">
+                 <size>
+                  <width>60</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>60</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/login_header.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lbl_login">
+                <property name="minimumSize">
+                 <size>
+                  <width>60</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>-1</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Login</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>140</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>90</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_mail_address_login_page">
+             <property name="minimumSize">
+              <size>
+               <width>341</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Mail Address:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_page_login_mail" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QLabel" name="lbl_email_icon_login_page">
+                <property name="minimumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/email_1.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_email_page_login">
+                <property name="minimumSize">
+                 <size>
+                  <width>351</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>Type your mail address</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_password_login_page">
+             <property name="minimumSize">
+              <size>
+               <width>341</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Password:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_page_login_password" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="lbl_password_icon_page_login">
+                <property name="minimumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/password.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_password_page_login">
+                <property name="minimumSize">
+                 <size>
+                  <width>351</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+                <property name="placeholderText">
+                 <string>Type your password</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_page_login_sub_bar" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QCheckBox" name="checkBox_show_password_page_login">
+                <property name="minimumSize">
+                 <size>
+                  <width>101</width>
+                  <height>17</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Show Password</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>189</width>
+                  <height>19</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_login">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>Log In</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/login_btn.png</normaloff>:/newSource/icons/login_btn.png</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_forgot_container" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>401</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <spacer name="horizontalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>84</width>
+                  <height>19</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="lbl_forgot_password">
+                <property name="minimumSize">
+                 <size>
+                  <width>131</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>0</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Forgot your password?</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_forgot_password">
+                <property name="minimumSize">
+                 <size>
+                  <width>61</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Click to reset your password</string>
+                </property>
+                <property name="text">
+                 <string>Click here!</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>20</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>96</width>
+                  <height>19</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_reset_password">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="1" column="0">
+         <widget class="QWidget" name="widget_header_page_reset_password" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>520</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>68</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QWidget" name="widget_inner_header_reset_password" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>441</width>
+               <height>61</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>61</height>
+              </size>
+             </property>
+             <widget class="QWidget" name="widget_header_inner_header_reset_password" native="true">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>-10</y>
+                <width>501</width>
+                <height>42</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>42</height>
+               </size>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>139</width>
+                   <height>10</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbl_reset_password_icon">
+                 <property name="minimumSize">
+                  <size>
+                   <width>40</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>22</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap resource="../icons_source.qrc">:/newSource/icons/reset_password_2.png</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lbl_header">
+                 <property name="minimumSize">
+                  <size>
+                   <width>140</width>
+                   <height>22</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>22</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>-1</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Reset Password</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>138</width>
+                   <height>10</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QLabel" name="lbl_header_message">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>30</y>
+                <width>501</width>
+                <height>20</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>441</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>You can reset your password using your mail address, or you can contact your IT manager.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QWidget" name="widget_reset_password_container" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>459</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+	background-color:#242424;
+	border:1px solid #242424;
+	border-radius:10px;
+}
+
+QLabel {
+	color:#f0f0f0;
+	font-size:18px;
+}
+
+QLabel[objectName=&quot;lbl_header_message&quot;]{
+	font-size:12px;
+}
+
+QLabel[objectName=&quot;lbl_email_page_reset&quot;]{
+	font-size:12px;
+}
+
+QLabel[objectName=&quot;lbl_otp_message&quot;]{
+	font-size:11px;
+}
+
+QLabel[objectName=&quot;lbl_otp_spam_message&quot;]{
+	font-size:11px;
+}
+
+QLineEdit {
+	border:2px solid #555555;
+	border-radius:10px;
+	background-color:#555555;
+	color:#f0f0f0;
+	padding-left:8px;
+}
+
+QLineEdit::focus{
+	border:1px solid #f0f0f0;
+	border-radius:10px;
+	background-color:#555555;
+	background
+}
+
+QPushButton {
+	background-color:#be8af9;
+	color:#1b0038;
+	border:2px solid #be8af9;
+	border-radius:10px;
+}
+
+QPushButton::hover {
+	background-color:#f0f0f0;
+	color:#000000;
+	border:2px solid #f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton::pressed {
+	background-color:#808080;
+	color:#000000;
+	border:2px solid #808080;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_cancel_page_reset&quot;]{
+	background-color:#555555;
+	border:2px solid #555555;
+	color:#f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_cancel_page_reset&quot;]::hover {
+	background-color:#f0f0f0;
+	color:#000000;
+	border:2px solid #f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_cancel_page_reset&quot;]::pressed {
+	background-color:#808080;
+	color:#000000;
+	border:2px solid #808080;
+	border-radius:10px;
+}
+
+QCheckBox {
+	color:#f0f0f0;
+}</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="lbl_email_page_reset">
+             <property name="minimumSize">
+              <size>
+               <width>341</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Mail Address:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_10" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QLabel" name="lbl_email_icon_page_reset">
+                <property name="minimumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/email_2.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_email_page_reset">
+                <property name="minimumSize">
+                 <size>
+                  <width>351</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Your e-mail address registered in the system</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Type your mail address</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_otp_message">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>We will send a one-time password to the email address you specified.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_otp_spam_message">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>You may have to check your spam folder.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_sub_bar_page_reset" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <spacer name="horizontalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>110</width>
+                  <height>19</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_cancel_page_reset">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Turn back to login screen</string>
+                </property>
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/cancel.png</normaloff>:/newSource/icons/cancel.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_send_code">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Continue with the process</string>
+                </property>
+                <property name="text">
+                 <string>Send Code</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/send_code_4.png</normaloff>:/newSource/icons/send_code_4.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_10">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>111</width>
+                  <height>19</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_reset_password_step2">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QWidget" name="widget_header_reset_step2" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>411</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel[objectName=&quot;lbl_header_reset_step2&quot;] {
+	color:#f0f0f0;
+	background-color:#191919;
+	font-size:18px;
+	font-weight:bold;
+}
+
+QLabel[objectName=&quot;lbl_header_message_reset_step2&quot;] {
+	color:#f0f0f0;
+	background-color:#191919;
+	font-size:12px;
+}
+
+QWidget {
+	background-color:#191919;
+}</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QLabel" name="lbl_message_reset_step2">
+             <property name="text">
+              <string>Almost Done,</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_header_message_reset_step2">
+             <property name="text">
+              <string>Provide the one-time password we sent you and a new log in password</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_container_reset_step2" native="true">
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+	background-color:#242424;
+	border:1px solid #242424;
+	border-radius:10px;
+}
+
+QLabel {
+	color:#f0f0f0;
+	font-size:18px;
+}
+
+QLabel[objectName=&quot;lbl_passcode&quot;]{
+	font-size:11px;
+}
+
+QLabel[objectName=&quot;lbl_new_password&quot;]{
+	font-size:11px;
+}
+
+QLabel[objectName=&quot;lbl_confirm_password&quot;]{
+	font-size:11px;
+}
+
+QLineEdit {
+	border:2px solid #555555;
+	border-radius:10px;
+	background-color:#555555;
+	color:#f0f0f0;
+	padding-left:8px;
+}
+
+QLineEdit::focus{
+	border:1px solid #f0f0f0;
+	border-radius:10px;
+	background-color:#555555;
+	background
+}
+
+QPushButton{
+	background-color:#555555;
+	border:2px solid #555555;
+	color:#f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton::hover {
+	background-color:#f0f0f0;
+	color:#000000;
+	border:2px solid #f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton::pressed {
+	background-color:#808080;
+	color:#000000;
+	border:2px solid #808080;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_complete&quot;] {
+	background-color:#be8af9;
+	color:#1b0038;
+	border:2px solid #be8af9;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_complete&quot;]::hover {
+	background-color:#f0f0f0;
+	color:#000000;
+	border:2px solid #f0f0f0;
+	border-radius:10px;
+}
+
+QPushButton[objectName=&quot;btn_complete&quot;]::pressed {
+	background-color:#808080;
+	color:#000000;
+	border:2px solid #808080;
+	border-radius:10px;
+}
+
+QCheckBox {
+	color:#f0f0f0;
+}</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="lbl_passcode">
+             <property name="minimumSize">
+              <size>
+               <width>341</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Passcode:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_passcode" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <widget class="QLabel" name="lbl_passcode_icon">
+                <property name="minimumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/passcode.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_passcode">
+                <property name="minimumSize">
+                 <size>
+                  <width>351</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>Type the one-time password that we sent you</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_new_password">
+             <property name="minimumSize">
+              <size>
+               <width>341</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>New Password:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_new_password" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <item>
+               <widget class="QLabel" name="lbl_password_icon_reset_step2">
+                <property name="minimumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/password.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_new_password">
+                <property name="minimumSize">
+                 <size>
+                  <width>351</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+                <property name="placeholderText">
+                 <string>Type your new password</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_confirm_password">
+             <property name="minimumSize">
+              <size>
+               <width>341</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Confirm Password:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_confirm_password" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <item>
+               <widget class="QLabel" name="lbl_confirm_password_icon">
+                <property name="minimumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>31</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/confirm_password.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_confirm_password">
+                <property name="minimumSize">
+                 <size>
+                  <width>351</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+                <property name="placeholderText">
+                 <string>Confirm your new password</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_show_password" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
+               <widget class="QCheckBox" name="checkBox_show_password_reset_step2">
+                <property name="minimumSize">
+                 <size>
+                  <width>101</width>
+                  <height>17</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Show Password</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_12">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>189</width>
+                  <height>19</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_20" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>406</width>
+               <height>40</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_16">
+              <item>
+               <widget class="QPushButton" name="btn_cancel_page_reset_step_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Turn back to login screen</string>
+                </property>
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/cancel.png</normaloff>:/newSource/icons/cancel.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_back_reset_step2">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Turn back to arrange your email address</string>
+                </property>
+                <property name="text">
+                 <string>Back</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/back.png</normaloff>:/newSource/icons/back.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_resend_code">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Click to get a new passcode</string>
+                </property>
+                <property name="text">
+                 <string>Resend Code</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/resend.png</normaloff>:/newSource/icons/resend.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_complete">
+                <property name="minimumSize">
+                 <size>
+                  <width>91</width>
+                  <height>31</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="toolTip">
+                 <string>Change the password</string>
+                </property>
+                <property name="text">
+                 <string>Complete</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icons_source.qrc">
+                  <normaloff>:/newSource/icons/complete.png</normaloff>:/newSource/icons/complete.png</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>154</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_about">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="1" column="0">
+         <widget class="QWidget" name="widget_container_page_about" native="true">
+          <property name="styleSheet">
+           <string notr="true">QWidget {
+	background-color:#242424;
+	border:1px solid #242424;
+	border-radius:10px;
+}
+
+QLabel {
+	color:#f0f0f0;
+	font-size:18px;
+}</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QWidget" name="widget_profile_1" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>170</width>
+               <height>0</height>
+              </size>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="1" column="0">
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>42</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="3" column="1">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>58</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="lbl_profile_1_icon">
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Fevzi FİDAN</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/profile_1.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <spacer name="horizontalSpacer_13">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>42</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="0" colspan="3">
+               <widget class="QWidget" name="widget_profile_1_info" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>142</width>
+                  <height>92</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+	font-size:12px;
+}</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_9">
+                 <item>
+                  <widget class="QLabel" name="lbl_profile_1_name">
+                   <property name="minimumSize">
+                    <size>
+                     <width>133</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fevzi FİDAN</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widget_profile_1_no" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>133</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_14">
+                    <item>
+                     <widget class="QLabel" name="lbl_profile_1_no_header">
+                      <property name="minimumSize">
+                       <size>
+                        <width>38</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>40</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>Student Number</string>
+                      </property>
+                      <property name="text">
+                       <string>S.No:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_18">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lbl_profile_1_no">
+                      <property name="minimumSize">
+                       <size>
+                        <width>72</width>
+                        <height>16</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>NULL</string>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <spacer name="verticalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>65</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_profile_2" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>170</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel {
+	font-size:12px;
+}</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="3" column="1">
+               <spacer name="verticalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>58</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="lbl_profile_2_icon">
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Hikmet ÇATAK</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/profile_1.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="3">
+               <widget class="QWidget" name="widget_profile_2_info" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>142</width>
+                  <height>92</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+	font-size:12px;
+}</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_10">
+                 <item>
+                  <widget class="QLabel" name="lbl_profile_2_name">
+                   <property name="minimumSize">
+                    <size>
+                     <width>133</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Hikmet ÇATAK</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widget_profile_2_no" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>133</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_17">
+                    <item>
+                     <widget class="QLabel" name="lbl_profile_2_no_header">
+                      <property name="minimumSize">
+                       <size>
+                        <width>38</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>40</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>Student Number</string>
+                      </property>
+                      <property name="text">
+                       <string>S.No:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_19">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lbl_profile_2_no">
+                      <property name="minimumSize">
+                       <size>
+                        <width>72</width>
+                        <height>16</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>NULL</string>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <spacer name="horizontalSpacer_15">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>42</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="0">
+               <spacer name="horizontalSpacer_14">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>42</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
+               <spacer name="verticalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>65</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_profile_3" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>170</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLabel {
+	font-size:12px;
+}</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="2" column="0" colspan="3">
+               <widget class="QWidget" name="widget_profile_3_info" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>142</width>
+                  <height>92</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLabel {
+	font-size:12px;
+}</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_11">
+                 <item>
+                  <widget class="QLabel" name="lbl_profile_3_name">
+                   <property name="minimumSize">
+                    <size>
+                     <width>133</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Ömer Faruk AZİLİ</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widget_profile_3_no" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>133</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_18">
+                    <item>
+                     <widget class="QLabel" name="lbl_profile_3_no_header">
+                      <property name="minimumSize">
+                       <size>
+                        <width>38</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>40</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="toolTip">
+                       <string>Student Number</string>
+                      </property>
+                      <property name="text">
+                       <string>S.No:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_20">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="lbl_profile_3_no">
+                      <property name="minimumSize">
+                       <size>
+                        <width>72</width>
+                        <height>16</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>NULL</string>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>58</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="0">
+               <spacer name="horizontalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>42</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="2">
+               <spacer name="horizontalSpacer_17">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>42</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="lbl_profile_3_icon">
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="toolTip">
+                 <string>Ömer Faruk AZİLİ</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../icons_source.qrc">:/newSource/icons/profile_1.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <spacer name="verticalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>65</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QWidget" name="widget_header_page_about" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>411</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>68</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel[objectName=&quot;lbl_header_about&quot;] {
+	color:#f0f0f0;
+	background-color:#191919;
+	font-size:18px;
+	font-weight:bold;
+}
+
+QLabel[objectName=&quot;lbl_header_message_about&quot;] {
+	color:#f0f0f0;
+	background-color:#191919;
+	font-size:12px;
+}
+
+QWidget {
+	background-color:#191919;
+}</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_19">
+           <item>
+            <spacer name="horizontalSpacer_21">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>181</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_about_icon">
+             <property name="minimumSize">
+              <size>
+               <width>40</width>
+               <height>28</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../icons_source.qrc">:/newSource/icons/about.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbl_header_about">
+             <property name="minimumSize">
+              <size>
+               <width>61</width>
+               <height>26</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>-1</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>About</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_22">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>180</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>550</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuForm">
+    <property name="title">
+     <string>Application</string>
+    </property>
+    <widget class="QMenu" name="menu_Check_Connection">
+     <property name="title">
+      <string>Check Connection</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../icons_source.qrc">
+       <normaloff>:/newSource/icons/check_connection.png</normaloff>:/newSource/icons/check_connection.png</iconset>
+     </property>
+     <addaction name="action_3_sec"/>
+     <addaction name="action_5_sec"/>
+     <addaction name="action_10_sec"/>
+     <addaction name="action_30_sec"/>
+     <addaction name="action_60_sec"/>
+     <addaction name="action_90_sec"/>
+     <addaction name="action_120_sec"/>
+     <addaction name="separator"/>
+     <addaction name="action_Never"/>
+    </widget>
+    <addaction name="action_Clear_All"/>
+    <addaction name="action_Refresh_Connection"/>
+    <addaction name="menu_Check_Connection"/>
+    <addaction name="separator"/>
+    <addaction name="action_Restart"/>
+   </widget>
+   <addaction name="menuForm"/>
+  </widget>
+  <action name="action3_sec">
+   <property name="text">
+    <string>3 sec</string>
+   </property>
+  </action>
+  <action name="action5_sec">
+   <property name="text">
+    <string>5 sec</string>
+   </property>
+  </action>
+  <action name="action10_sec">
+   <property name="text">
+    <string>10 sec</string>
+   </property>
+  </action>
+  <action name="action30_sec">
+   <property name="text">
+    <string>30 sec</string>
+   </property>
+  </action>
+  <action name="action60_sec">
+   <property name="text">
+    <string>60 sec</string>
+   </property>
+  </action>
+  <action name="action90_sec">
+   <property name="text">
+    <string>90 sec</string>
+   </property>
+  </action>
+  <action name="action120_sec">
+   <property name="text">
+    <string>120 sec</string>
+   </property>
+  </action>
+  <action name="actionNever">
+   <property name="text">
+    <string>Never</string>
+   </property>
+  </action>
+  <action name="action_Clear_All">
+   <property name="icon">
+    <iconset resource="../icons_source.qrc">
+     <normaloff>:/newSource/icons/clear_all.png</normaloff>:/newSource/icons/clear_all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear All</string>
+   </property>
+  </action>
+  <action name="action_Refresh_Connection">
+   <property name="icon">
+    <iconset resource="../icons_source.qrc">
+     <normaloff>:/newSource/icons/reconnect.png</normaloff>:/newSource/icons/reconnect.png</iconset>
+   </property>
+   <property name="text">
+    <string>Try to Reconnect</string>
+   </property>
+  </action>
+  <action name="action_Restart">
+   <property name="icon">
+    <iconset resource="../icons_source.qrc">
+     <normaloff>:/newSource/icons/restart.png</normaloff>:/newSource/icons/restart.png</iconset>
+   </property>
+   <property name="text">
+    <string>Restart</string>
+   </property>
+  </action>
+  <action name="action_3_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>3 sec</string>
+   </property>
+  </action>
+  <action name="action_5_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>5 sec</string>
+   </property>
+  </action>
+  <action name="action_10_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>10 sec</string>
+   </property>
+  </action>
+  <action name="action_30_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>30 sec</string>
+   </property>
+  </action>
+  <action name="action_60_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>60 sec</string>
+   </property>
+  </action>
+  <action name="action_90_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>90 sec</string>
+   </property>
+  </action>
+  <action name="action_120_sec">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>120 sec</string>
+   </property>
+  </action>
+  <action name="action_Never">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Never</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../icons_source.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -25,8 +25,8 @@ def connection_check():
     """
     try:
         connection=pymysql.connect(host='localhost',
-                               user='root',
-                               password="sql5858",
+                               user='user',
+                               password="password",
                                database='human_resources')
         
     except pymysql.MySQLError as e:

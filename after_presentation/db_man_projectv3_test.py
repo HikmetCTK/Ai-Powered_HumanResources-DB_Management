@@ -136,7 +136,7 @@ def reset_change_password(new_password, entered_code, verification_code, user_em
         return False
     
 
-def hiring(name,surname,birth,gender,job_title,derpatment,salary,hire_date,email,phone_no,password):
+def hiring(name,surname,birth,gender,job_title,department,salary,hire_date,email,phone_no,password):
     connection=connect()
     cursor=connection.cursor()
     

@@ -11,9 +11,9 @@ def connect():
 
     try:
         connection=pymysql.connect(host='localhost',
-                               user='user',
-                               password="password",
-                               database='database_name')
+                               user='root',
+                               password="sql5858",
+                               database='human_resources',port=3306)
         return connection
     except pymysql.MySQLError as e:
         return str(e)
@@ -25,9 +25,9 @@ def connection_check():
     """
     try:
         connection=pymysql.connect(host='localhost',
-                               user='user',
-                               password="password",
-                               database='database_name')
+                               user='root',
+                               password="sql5858",
+                               database='human_resources')
         
     except pymysql.MySQLError as e:
         # If an error occurs trying to create a connection, there is no need in trying to close it.
@@ -145,7 +145,7 @@ def hiring(name,surname,birth,gender,job_title,department,salary,hire_date,email
     
             query="""insert into employees(first_name, last_name, date_of_birth, gender, job_title, department, salary, hire_date, email, phone_number, password) values 
         (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            values=name,surname,birth,gender,job_title,derpatment,salary,hire_date,email,phone_no,password
+            values=name,surname,birth,gender,job_title,department,salary,hire_date,email,phone_no,password
             cursor.execute(query,values)
             connection.commit()
     except Exception as e:

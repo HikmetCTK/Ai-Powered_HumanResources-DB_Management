@@ -47,7 +47,7 @@ def on_preference_toggled(obj, checked):
 def updateConnectionStatus(obj):
     try:
         if obj.sender().objectName() == "action_Refresh_Connection":
-            addtInfo = f" - {strftime(r"%H:%M:%S")}"
+            addtInfo = f' - {strftime(r"%H:%M:%S")}'
         else:
             addtInfo = ""
     except:

@@ -1,10 +1,10 @@
-# About the Project
+# About the Project 🎯
 This project is a Windows application that brings to life the theoretical knowledge learned in the Database Systems course. It is a simple $${\color{lightblue}Human \space Resources \space Management \space System}$$ adaptation designed to be used between managers and employees.
 
-# Programming Languages and Tools Used
+# Programming Languages and Tools Used 🛠️
 The project has been developed in _Python_ language, _MySQL_ database was used, and _PyQt6_ GUI toolkit was used for the interface.
 
-# Features
+# Features 🚀
 #### Below are the available features for **Manager** and **Employee** roles:
 
 | $${\color{#be8af9}Manager \space Side}$$ | $${\color{#be8af9}Employee \space Side}$$ |
@@ -22,10 +22,10 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | Event Planning |
 | Request Evaluation System |
 
-# Supported Languages
+# Supported Languages 🌍
 - English
 
-# Sample App Screenshots
+# Sample App Screenshots 🌄
 |  |  |  |
 | :--: | :--: | :--: |
 | ![Login Image](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/login_page.png) | ![Reset Password Step 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/reset_password_step_1.png) | ![Reset Password Step 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/reset_password_step_2.png)
@@ -34,7 +34,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | ![Quick Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/liste%20quick%20action.png) | ![View Employees](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/list%20employe.png) | ![Employee Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/i%C5%9Flem%20sayfas%C4%B1.png) |
 | ![Search Bar Filter](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/search.png) | ![Special Request Evaluation 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval.png) | ![Special Request Evaluation 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval_2.png)
 
-Ai Agent Workflow
+Ai Agent Workflow 🤖
 ![image](https://github.com/user-attachments/assets/dcbb8933-8bac-4fc2-aba6-2429b635d061)
 
 

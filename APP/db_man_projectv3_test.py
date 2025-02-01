@@ -16,7 +16,7 @@ def connect():
                                database='human_resources',port=3306)
         return connection
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
 
 def connection_check():
     """
@@ -69,7 +69,7 @@ def login(email,password): #id eklendi yeni login fonk
                 return None
     except Exception as e:
         # If the returning str is neither 'Human resources' nor 'Employee', that means that an error has occurred!
-        return str(e)
+        raise e
     
     finally:
        
@@ -106,7 +106,7 @@ def send_verification_code(user_email):
         
         return verification_code
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
 
 
 
@@ -126,7 +126,7 @@ def reset_change_password(new_password, entered_code, verification_code, user_em
             #print("Password changed successfully")
                 return True
         except pymysql.MySQLError as e:
-            return str(e)
+            raise e
         finally:
             cursor.close()
             connection.close()
@@ -149,7 +149,7 @@ def hiring(name,surname,birth,gender,job_title,department,salary,hire_date,email
             cursor.execute(query,values)
             connection.commit()
     except Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -166,7 +166,7 @@ def load_employee():  #load  id,name,surname of employees
             employees=cursor.fetchall()
             return employees
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -180,7 +180,7 @@ def load_employee_is_active():  #load  id,name,surname of employees
             employees=cursor.fetchall()
             return employees
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -192,7 +192,7 @@ def not_working(selected_employee:int): #changes employees is_active value 1 to 
            cursor.execute(query,selected_employee)
            connection.commit()
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -220,7 +220,7 @@ def load_infos(table_name): #^^# Brings all records from specific table
 
             return items
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 # load_infos('items') #sample usage
@@ -251,7 +251,7 @@ def update_quantity_add(selected_item,add_quantity):
             cursor.execute(add_query,(add_quantity,item_id))
             connection.commit()
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -267,7 +267,7 @@ def update_quantity_sub(selected_item,sub_quantity):
             cursor.execute(substract_query,(sub_quantity,item_id))
             connection.commit()
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -303,7 +303,7 @@ def load_item_list_with_name(): # çalışan ismiyle birlikte zimmetli eşyayı 
             return employee_item_list
 
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -319,7 +319,7 @@ def remain_quantity(item_id): #return integer value which is remain stock by ite
             remain_quantity=cursor.fetchone()
             return remain_quantity[0]
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -337,7 +337,7 @@ def assign_item_to_employee_no_checking(id,item_id,quantity): # assign item to e
             cursor.execute(substract_query,(quantity,item_id))
             connection.commit()
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -363,7 +363,7 @@ def assign_item_to_employee(id,item_id,quantity):
             else:
                 return "not enough product"
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -405,7 +405,7 @@ def remove_item_from_employee(assigned_list):
             connection.commit()
             
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -433,7 +433,7 @@ def remove_item_from_selected_employee(assign_id):
             connection.commit()
             
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -452,7 +452,7 @@ def get_assigned_items(emp_id): #^^# seçilen kullanıcının id sini alıp sade
             return resultss
     
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -472,7 +472,7 @@ def show_assigned_items_employee_side(emp_id): #^^# kullanıcıya zimmetli eşya
             return resultss
     
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -492,7 +492,7 @@ def search_for_employee(search_term): #tabloya göre arama yapan fonksiyon
                 return table
 
     except pymysql.MySQLError as e:
-            return str(e)
+            raise e
     finally:
             cursor.close()
             connection.close()
@@ -507,7 +507,7 @@ def update_employee_salary(emp_id,new_salary):
             cursor.execute(sql, (new_salary, emp_id))
             connection.commit()
     except Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -522,7 +522,7 @@ def search(keyword,table_name,column_name): #istenilen tablonun istenilen sütun
         results=cursor.fetchall()
         return results
     except Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -547,7 +547,7 @@ def send_message_anyone(from_id,employee_ids,message,subject): #for both side ##
             return "Messages sent successfully!" #message alert
 
     except Exception as e:
-        return str(e)
+        raise e
 
     finally:
         cursor.close()
@@ -574,7 +574,7 @@ def see_message(emp_id): # for both side  ##^^##
              """
             return messages
     except Exception as e:
-        return str(e)
+        raise e
 
     finally:
         cursor.close()
@@ -594,7 +594,7 @@ def see_messagev2(emp_id): # for both side  Provide sending message to sender #^
 
             return messages
     except Exception as e:
-        return str(e)
+        raise e
 
     finally:
         cursor.close()
@@ -623,7 +623,7 @@ def mark_message_as_read(message_id): ##^^##
             cursor.execute(query, (message_id,))
             connection.commit()
     except Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -639,7 +639,7 @@ def add_event(event_name,event_text,event_date): ##^^##
             connection.commit()
             return True
     except Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -662,7 +662,7 @@ def add_event(event_name,event_text,event_date): ##^^##
 #              """
 #             return events
 #     except Exception as e:
-#         return str(e)
+#         raise e
 
 #     finally:
 #         cursor.close()
@@ -685,7 +685,7 @@ def see_events(): ##^^##
              """
             return events
     except Exception as e:
-        return str(e)
+        raise(e)
 
     finally:
         cursor.close()
@@ -705,7 +705,7 @@ def add_pending_email(email_title,email_description,from_emp_id,to_emp_id,send_d
             cursor.execute(query,(email_title,email_description,from_emp_id,to_emp_id,send_date))
             connection.commit()
     except Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -734,7 +734,7 @@ def get_email(emp_id):
             email=cursor.fetchone()
             return email
         except Exception as e:
-            return str(e)
+            raise e
         finally:
             cursor.close()
             connection.close()
@@ -782,9 +782,9 @@ def send_pend_email(records):
                                         cursor.execute(query,pend_id)
                                         connection.commit()
                                 except Exception as e:
-                                    return str(e)
+                                    raise e
                         except Exception as e:
-                            return str(e)
+                            raise e
         else:
             return "gönderilecek mesaj yok"
     except Exception as e:
@@ -874,7 +874,7 @@ def load_employee_for_message_selection(search_term=""): #  for message interfac
             employees=cursor.fetchall()
             return employees
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 def load_employee_for_salary_adjustment():  #  for adjustment interface
@@ -887,7 +887,7 @@ def load_employee_for_salary_adjustment():  #  for adjustment interface
             employees=cursor.fetchall()
             return employees
     except pymysql.MySQLError as e:
-        return str(e)
+        raise e
     finally:
         connection.close()
 
@@ -919,7 +919,7 @@ def create_special_request(employee_id, request_type,description,request_amount=
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -941,7 +941,7 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
             cursor.execute(sql)
             return cursor.fetchall()
     except Exception as e:
-        return str(e)
+        raise e
 
     finally:
         cursor.close()
@@ -990,7 +990,7 @@ def get_employee_special_requests_history(employee_id):#ID'si verilen çalışan
             return cursor.fetchall()
     except Exception as e:
         print(f"Özel talep geçmişi getirilirken hata: {e}")
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1032,7 +1032,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date,desc_requ
     except Exception as e:
         connection.rollback()
         print(f"İzin talebi oluşturulurken hata: {e}")
-        return str(e)
+        raise e
 
     finally:
         
@@ -1053,7 +1053,7 @@ def get_pending_leave_requests():#Beklemede Olan tüm izinleri getirir
             cursor.execute(sql)
             return cursor.fetchall()
     except Exception as e:
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1106,7 +1106,7 @@ def get_employee_leave_history(employee_id):#ID'si verilen çalışanın izin ge
             cursor.execute(sql, (employee_id,))
             return cursor.fetchall()
     except Exception as e:
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1135,7 +1135,7 @@ def calculate_employee_paid_leaves(employee_id):#ID'si verilen çalışanın tü
                 return None
             
     except Exception as e:
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1288,7 +1288,7 @@ def create_monthly_work(employee_id, work_year, work_month,
             return cursor.lastrowid
     except Exception as e:
         connection.rollback()
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1309,7 +1309,7 @@ def get_monthly_work(work_month):#İstenen günkü tüm çalışan verilerini ge
             cursor.execute(sql,(work_month))
             return cursor.fetchall()
     except Exception as e:
-        return str(e)
+        raise e
 
     finally:
         cursor.close()
@@ -1330,7 +1330,7 @@ def get_employee_monthly_history(employee_id):#ID'si verilen çalışanın aylı
             cursor.execute(sql, (employee_id,))
             return cursor.fetchall()
     except Exception as e:
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1376,7 +1376,7 @@ def calculate_salary(employee_id,work_month,hour_salary,overtime_salary):#Basit 
 
 
         except Exception as e:
-            return str(e)
+            raise e
         
         finally:
             cursor.close()
@@ -1473,7 +1473,7 @@ def add_daily_working_hours(employee_id, work_date, attendance, clock_in_time,
 
     except Exception as e:
         connection.rollback()
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1493,7 +1493,7 @@ def get_today_working_hours(work_date):#İstenen günkü tüm çalışan veriler
             cursor.execute(sql,(work_date))
             return cursor.fetchall()
     except Exception as e:
-        return str(e)
+        raise e
 
     finally:
         cursor.close()
@@ -1514,7 +1514,7 @@ def get_employee_working_hours_history(employee_id):#ID'si verilen çalışanın
             return cursor.fetchall()
     except Exception as e:
         print(f"Özel talep geçmişi getirilirken hata: {e}")
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1596,7 +1596,7 @@ def calculate_monthly_work_statistics(employee_id, year, month):#Bu kod günlük
 
     except Exception as e:
         print(f"Hata oluştu: {e}")
-        return str(e)
+        raise e
     
     finally:
         cursor.close()
@@ -1679,7 +1679,7 @@ def special_request_status_for_employee(employee_id):
             records=cursor.fetchall()
             return records
     except  Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -1693,7 +1693,7 @@ def pending_special_requests_for_employee(employee_id):
             records=cursor.fetchall()
             return records
     except  Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -1708,7 +1708,7 @@ def leave_request_status_for_employee(employee_id):
             records=cursor.fetchall()
             return records
     except  Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()
@@ -1722,7 +1722,7 @@ def pending_leave_requests_for_employee(employee_id):
             records=cursor.fetchall()
             return records
     except  Exception as e:
-        return str(e)
+        raise e
     finally:
         cursor.close()
         connection.close()

@@ -21,6 +21,7 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | View Employees' Information |
 | Event Planning |
 | Request Evaluation System |
+| ChatBot |
 
 # Supported Languages 🌍
 - English
@@ -34,12 +35,17 @@ The project has been developed in _Python_ language, _MySQL_ database was used, 
 | ![Quick Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/liste%20quick%20action.png) | ![View Employees](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/list%20employe.png) | ![Employee Actions](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/i%C5%9Flem%20sayfas%C4%B1.png) |
 | ![Search Bar Filter](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/search.png) | ![Special Request Evaluation 1](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval.png) | ![Special Request Evaluation 2](https://github.com/HikmetCTK/MangmntSQL/blob/main/app%20pictures/special_request_approval_2.png)
 
+# ChatBot Demo Video 🎞️
+
+https://github.com/user-attachments/assets/5eca8a0d-6b4f-4028-a224-61e79618478c
+
+
+
 Ai Agent Workflow 🤖
 ![image](https://github.com/user-attachments/assets/dcbb8933-8bac-4fc2-aba6-2429b635d061)
 
 
 # Future Updates and Improvements
-- Chatbot
 - Organizational Chart
 - Viewing Statistics
 
@@ -51,7 +57,7 @@ Ai Agent Workflow 🤖
   - Designing Database and writing Python functions(Except Requests  and Salary Part) + Chatbot for talking with database
   - [GitHub](https://github.com/HikmetCTK)
 - Ömer Faruk AZİLİ
-  - ... Designing Database and writing Python functions(Requests  and Salary Part)
+  - Designing Database and writing Python functions(Requests  and Salary Part)
   - [GitHub](https://github.com/OmfAzl)
 
 

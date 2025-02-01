@@ -941,7 +941,6 @@ def get_pending_special_requests():#Beklemede Olan tüm talepleri getirir enum t
             cursor.execute(sql)
             return cursor.fetchall()
     except Exception as e:
-        print(f"Bekleyen özel talepler getirilirken hata: {e}")
         return str(e)
 
     finally:

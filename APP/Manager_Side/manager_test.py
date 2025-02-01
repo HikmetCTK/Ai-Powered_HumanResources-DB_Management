@@ -225,6 +225,10 @@ class ManagerApp(QMainWindow, Ui_ManagerWindow):
                 
                 # chatbot must be restarted
                 self.restartChatBotAgent()
+        
+            elif event.type() == QEvent.Type.KeyPress:
+                if event.key() in [Qt.Key.Key_Return, Qt.Key.Key_Enter]:
+                    self.btn_chatbot_send.click()
             
         return super().eventFilter(obj, event)
     

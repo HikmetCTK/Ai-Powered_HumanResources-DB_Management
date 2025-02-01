@@ -201,8 +201,5 @@ def friendly_chatbot(user_query,sql_result,sql_query):
     # print(friendly_prompt)
     return response.text
 
-while True:
-    user_query=input("sorgunuzu giriniz")
-    if user_query.lower()=="e":
-        break
-    print(ask_chatbot(user_query=user_query))
+
+# END

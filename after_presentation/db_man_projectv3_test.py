@@ -833,7 +833,7 @@ def send_email(records,email_title,email_description,from_emp_id,from_name,from_
                     query = "insert into email(email_title, email_description, from_emp_id, to_emp_id)values(%s,%s,%s,%s)"
                     cursor.execute(query, (email_title, email_description, from_emp_id, to_emp_id))
                     connection.commit()
-                return "Email sent and status updated in database."
+                return True
             except Exception as e:
                 return f"Error updating database: {e}"
 

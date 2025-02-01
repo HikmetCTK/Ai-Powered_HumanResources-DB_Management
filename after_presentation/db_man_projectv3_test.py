@@ -1010,8 +1010,7 @@ def create_leave_request(employee_id, leave_type, start_date, end_date,desc_requ
     
     try:
         # Toplam izin günü hesaplaması
-        total_days = (datetime.datetime.strptime(str(end_date), '%Y-%m-%d').date() - 
-                        datetime.datetime.strptime(str(start_date), '%Y-%m-%d').date()).days + 1
+        total_days = (end_date.date() - start_date.date()).days + 1
 
         created_at = datetime.datetime.now()
         

@@ -637,7 +637,7 @@ def add_event(event_name,event_text,event_date): ##^^##
             query="""insert into events_(event_name,event_text,event_date) values(%s,%s,%s)  """
             cursor.execute(query,(event_name,event_text,event_date))
             connection.commit()
-            return " event planned succesfully "
+            return True
     except Exception as e:
         return str(e)
     finally:

@@ -2,7 +2,7 @@
 This project is a Windows application that brings to life the theoretical knowledge learned in the Database Systems course. It is a simple $${\color{lightblue}Human \space Resources \space Management \space System}$$ adaptation designed to be used between managers and employees.
 
 # Programming Languages and Tools Used 🛠️
-The project has been developed in _Python_ language, _MySQL_ database was used, and _PyQt6_ GUI toolkit was used for the interface.
+The project has been developed in _Python_ language, _MySQL_ database was used, and _PyQt6_ GUI toolkit was used for the interface. Gemini 1.5 flash model was used for chatbot part.
 
 # Features 🚀
 #### Below are the available features for **Manager** and **Employee** roles:

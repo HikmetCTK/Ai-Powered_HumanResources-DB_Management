@@ -4,7 +4,7 @@ This project is a Windows application that brings to life the theoretical knowle
 # Programming Languages and Tools Used 🛠️
 * Programming Language: Python 🐍
 * Graphical User Interface: PyQt6 🖼️
-* Database :MySQL🛢️
+* Database : MySQL🛢️
 * AI: Gemini-1.5-flash 🤖
 
 # Features 🚀

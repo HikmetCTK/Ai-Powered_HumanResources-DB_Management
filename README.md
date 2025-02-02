@@ -57,7 +57,8 @@ https://github.com/user-attachments/assets/5eca8a0d-6b4f-4028-a224-61e79618478c
   - UI Development
   - [GitHub](https://github.com/fevzifidan)
 - Hikmet ÇATAK
-  - Designing Database and writing Python functions(Except Requests  and Salary Part) + Chatbot for talking with database
+  - Designing Database and writing Python functions(Except Requests  and Salary Part)
+  - Chatbot for talking with database
   - [GitHub](https://github.com/HikmetCTK)
 - Ömer Faruk AZİLİ
   - Designing Database and writing Python functions(Requests  and Salary Part)
